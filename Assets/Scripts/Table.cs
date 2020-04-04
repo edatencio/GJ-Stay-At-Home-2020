@@ -1,42 +1,50 @@
 using UnityEngine;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using System;
 
-public class Table : MonoBehaviour, IInteractable
+public class Table : Interactable
 {
-    [SerializeField] private Transform navMeshTarget;
+    [SerializeField] private Transform itemTarget;
     [ReorderableList] public List<Seat> Seats;
-
     public ClientGroup clientGroup { get; private set; }
 
     public bool IsTaken { get; private set; }
 
-    public Transform NavMeshTarget => navMeshTarget;
+    protected override Type itemType => typeof(IInteractableItem);
+
     private void Start()
     {
         Restaurant.ClientLeave += OnClientLeave;
+        State = InteractableState.Receive;
     }
+
     public void SetCostumer(ClientGroup clientGroup)
     {
         this.clientGroup = clientGroup;
         IsTaken = true;
 
-        for (int i = 0; i < clientGroup.costumers.Count; i++)
-            clientGroup.costumers[i].transform.position = Seats[i].transform.position;
+        for (int i = 0; i < clientGroup.clients.Count; i++)
+            clientGroup.clients[i].transform.position = Seats[i].transform.position;
     }
 
     private void OnClientLeave()
     {
-
     }
 
     private void OnDestroy()
     {
         Restaurant.ClientLeave -= OnClientLeave;
-
     }
-    public void Interact()
+
+    protected override void OnItemSet()
     {
-        Log.Message(name, "Interact");
+        currentItem.Model.transform.position = itemTarget.position;
+        State = InteractableState.Emit;
+    }
+
+    protected override void OnItemGet()
+    {
+        State = InteractableState.Receive;
     }
 }

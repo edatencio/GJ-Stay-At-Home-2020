@@ -1,13 +1,25 @@
 using UnityEngine;
 using UnityEngine.AI;
+using NaughtyAttributes;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
     [SerializeField] private NavMeshAgent navMesh;
+    [SerializeField, ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
-    private IInteractable destination;
+    [SerializeField, BoxGroup("Debug")] private GameObject menuPrefab;
+
+    private IInteractableItem[] items = new IInteractableItem[2];
+    private Interactable destination;
     private bool interacted;
+
+    private void Start()
+    {
+        items[0] = Instantiate(menuPrefab).GetComponent<IInteractableItem>();
+        items[0].Model.transform.position = itemsPosition[0].position;
+        items[0].Model.transform.SetParent(itemsPosition[0]);
+    }
 
     private void Update()
     {
@@ -21,7 +33,17 @@ public class PlayerController : MonoBehaviour
                 if (!interacted)
                 {
                     interacted = true;
-                    destination.Interact();
+
+                    switch (destination.State)
+                    {
+                        case Interactable.InteractableState.Emit:
+                            GetItem();
+                            break;
+
+                        case Interactable.InteractableState.Receive:
+                            SetItem();
+                            break;
+                    }
                 }
 
                 Vector3 direction = (destination.transform.position.With(y: transform.position.y) - transform.position);
@@ -39,7 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, camera.farClipPlane))
             {
-                IInteractable interactable = hit.transform.GetComponent<IInteractable>();
+                Interactable interactable = hit.transform.GetComponent<Interactable>();
 
                 if (interactable != null)
                 {
@@ -50,4 +72,45 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void GetItem()
+    {
+        bool spaceAvailable = false;
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+                spaceAvailable = true;
+        }
+
+        if (!spaceAvailable)
+            return;
+
+        if (!destination.TryGetItem<IInteractableItem>(out IInteractableItem item))
+            return;
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+            {
+                items[i] = item;
+                items[i].Model.transform.position = itemsPosition[i].position;
+                items[i].Model.transform.SetParent(itemsPosition[i]);
+                return;
+            }
+        }
+    }
+
+    private void SetItem()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null && destination.SetItem(items[i]))
+            {
+                items[i].Model.transform.SetParent(null);
+                items[i] = null;
+            }
+        }
+    }
 }
+

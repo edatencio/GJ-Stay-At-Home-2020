@@ -1,24 +1,36 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using NaughtyAttributes;
 
 public class ClientGroup : MonoBehaviour
 {
-    public bool IsSitting { get; set; }
     public float contactRadius = 3f;
-    [SerializeField] private Order order;
-    public Order Order => order;
-    public List<Costumer> costumers;
-    public State State { get; set; }
     public float patienceTime = 60f;
     public float timeToOrder = 3f;
     public float eatingTime = 10f;
+
     [Range(0, 1)] public float SatisfactionAmount;
+    [SerializeField] private GameObject orderPrefab;
+    [ReorderableList] public List<Client> clients;
+
+    private Table table;
     private Vector3 orignalPos;
     private Dragger dragger;
-    public bool isDragging { get; private set; }
     private bool eating;
     private bool orded;
+
+    private Order order;
+
+    public enum ClientGroupState { Waiting, WaitingMenu, Order, WaitingOrder, Eating, Finish }
+
+    [ShowNativeProperty]
+    public ClientGroupState State { get; set; }
+
+    public bool IsSitting { get; set; }
+
+    public bool isDragging { get; private set; }
+
     private void Start()
     {
         orignalPos = transform.position;
@@ -30,49 +42,86 @@ public class ClientGroup : MonoBehaviour
     {
         switch (State)
         {
-            case State.WAITING:
-                SatisfactionAmount -= Time.deltaTime / patienceTime;
+            case ClientGroupState.Waiting:
+                {
+                    SatisfactionAmount -= Time.deltaTime / patienceTime;
 
-                if (IsSitting)
-                    ChangeState(State.SIT);
+                    if (IsSitting)
+                        ChangeState(ClientGroupState.WaitingMenu);
+                }
                 break;
-            case State.SIT:
-                SatisfactionAmount -= Time.deltaTime / patienceTime;
-                if (orded)
-                    StartCoroutine(Ording());
+
+            case ClientGroupState.WaitingMenu:
+                {
+                    SatisfactionAmount -= Time.deltaTime / patienceTime;
+
+                    if (table.TryGetItem<Menu>(out IInteractableItem item))
+                    {
+                        if (item is Menu)
+                        {
+                            Destroy(item as Menu);
+                            ChangeState(ClientGroupState.Order);
+                            StartCoroutine(Ording());
+                        }
+                        else
+                        {
+                            table.SetItem(item);
+                        }
+                    }
+                }
                 break;
-            case State.WAITING_ORDER:
-                SatisfactionAmount -= Time.deltaTime / patienceTime;
-                //TODO añadir uan forma que el juegador interactue para pasar;
-                if (Order.IsReady)
-                    ChangeState(State.EATING);
+
+            case ClientGroupState.Order:
+                {
+                    table.SetItem(Instantiate(orderPrefab).GetComponent<Order>());
+                    ChangeState(ClientGroupState.WaitingOrder);
+                }
                 break;
-            case State.EATING:
+
+            case ClientGroupState.WaitingOrder:
+                {
+                    SatisfactionAmount -= Time.deltaTime / patienceTime;
+
+                    if (table.TryGetItem<Order>(out IInteractableItem item))
+                    {
+                        if ((item as Order) == order && (item as Order).IsCooked)
+                            ChangeState(ClientGroupState.Eating);
+                        else
+                            table.SetItem(item);
+                    }
+                }
+                break;
+
+            case ClientGroupState.Eating:
                 if (!eating)
                     StartCoroutine(Eat());
                 break;
-            case State.FINISH:
+
+            case ClientGroupState.Finish:
                 Restaurant.instance.LeaveRestaurant(this);
                 break;
         }
     }
+
     private IEnumerator Ording()
     {
-        orded = true;
         yield return new WaitForSeconds(timeToOrder);
-        ChangeState(State.WAITING_ORDER);
+        ChangeState(ClientGroupState.Order);
     }
+
     private IEnumerator Eat()
     {
         eating = true;
         yield return new WaitForSeconds(eatingTime);
-        ChangeState(State.FINISH);
+        ChangeState(ClientGroupState.Finish);
     }
-    private void ChangeState(State nextState)
+
+    private void ChangeState(ClientGroupState nextState)
     {
         SatisfactionAmount = Mathf.Clamp01(SatisfactionAmount * 1.2f);
         State = nextState;
     }
+
     #region Drag&Drop
     private void OnMouseDown()
     {
@@ -85,6 +134,7 @@ public class ClientGroup : MonoBehaviour
                 transform.position += Vector3.up * 0.5f;
             }
     }
+
     private void OnMouseUp()
     {
         if (IsSitting) return;
@@ -101,10 +151,10 @@ public class ClientGroup : MonoBehaviour
             {
                 table = collider.GetComponent<Table>();
 
-                if (table != null && !table.IsTaken && table.Seats.Count >= costumers.Count)
+                if (table != null && !table.IsTaken && table.Seats.Count >= clients.Count)
                 {
                     IsSitting = true;
-
+                    this.table = table;
                     table.SetCostumer(this);
                     return;
                 }
@@ -113,10 +163,12 @@ public class ClientGroup : MonoBehaviour
             }
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, contactRadius);
     }
-    #endregion
+
+    #endregion Drag&Drop
 }
