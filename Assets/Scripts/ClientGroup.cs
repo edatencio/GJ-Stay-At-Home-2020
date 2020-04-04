@@ -16,7 +16,7 @@ public class ClientGroup : MonoBehaviour
     [Range(0, 1)] public float SatisfactionAmount;
     private Vector3 orignalPos;
     private Dragger dragger;
-    private bool draggin;
+    public bool isDragging { get; private set; }
     private bool eating;
     private bool orded;
     private void Start()
@@ -52,7 +52,7 @@ public class ClientGroup : MonoBehaviour
                     StartCoroutine(Eat());
                 break;
             case State.FINISH:
-                Destroy(gameObject, 1f);
+                Restaurant.instance.LeaveRestaurant(this);
                 break;
         }
     }
@@ -76,11 +76,10 @@ public class ClientGroup : MonoBehaviour
     #region Drag&Drop
     private void OnMouseDown()
     {
-        Debug.Log(IsSitting);
         if (!IsSitting)
             if (Input.GetMouseButtonDown(0))
             {
-                draggin = true;
+                isDragging = true;
                 dragger.CanDrag = true;
 
                 transform.position += Vector3.up * 0.5f;
@@ -88,9 +87,11 @@ public class ClientGroup : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        if (IsSitting) return;
+
         if (!Input.GetMouseButtonDown(0))
         {
-            draggin = false;
+            isDragging = false;
             dragger.CanDrag = false;
 
             var colliders = Physics.OverlapSphere(transform.position, contactRadius);
@@ -107,7 +108,8 @@ public class ClientGroup : MonoBehaviour
                     table.SetCostumer(this);
                     return;
                 }
-                transform.position = orignalPos;
+                else
+                    transform.position = orignalPos;
             }
         }
     }
