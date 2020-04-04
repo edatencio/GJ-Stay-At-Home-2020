@@ -1,30 +1,25 @@
 using UnityEngine;
+
 public class Dragger : MonoBehaviour
 {
-    private Vector3 offSet;
-    private float mZCoord;
-    public bool canDrag = true;
+    private new Camera camera;
 
-    private void OnMouseDown()
-    {
-        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+    public bool CanDrag { get; set; }
 
-        offSet = gameObject.transform.position - GetMouseWorldPos();
-    }
-    private Vector3 GetMouseWorldPos()
+    private void Start()
     {
-        var mousePoint = Input.mousePosition;
-        mousePoint.z = mZCoord;
-        return Camera.main.ScreenToWorldPoint(mousePoint);
+        camera = Camera.main;
     }
-    private void OnMouseDrag()
+
+    private void FixedUpdate()
     {
-        if (!canDrag) return;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction, out var hit))
+        if (!CanDrag)
+            return;
+
+        if (Input.GetButton("Fire1"))
         {
-            var targetPos =  GetMouseWorldPos() + offSet;
-            transform.position = new Vector3(targetPos.x,transform.position.y,targetPos.z);
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, camera.farClipPlane))
+                transform.position = hit.point.With(y: transform.position.y);
         }
     }
 }
