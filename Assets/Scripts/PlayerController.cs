@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using NaughtyAttributes;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,10 +8,6 @@ public class PlayerController : MonoBehaviour
 
     private IInteractable destination;
     private bool interacted;
-
-    private void Start()
-    {
-    }
 
     private void Update()
     {
@@ -42,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, camera.farClipPlane))
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, camera.farClipPlane))
             {
                 IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 

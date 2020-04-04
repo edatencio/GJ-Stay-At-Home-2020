@@ -80,7 +80,7 @@ public class ClientGroup : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 draggin = true;
-                dragger.canDrag = true;
+                dragger.CanDrag = true;
 
                 transform.position += Vector3.up * 0.5f;
             }
@@ -91,7 +91,7 @@ public class ClientGroup : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
         {
             draggin = false;
-            dragger.canDrag = false;
+            dragger.CanDrag = false;
 
             var colliders = Physics.OverlapSphere(transform.position, contactRadius);
             Table table = null;
