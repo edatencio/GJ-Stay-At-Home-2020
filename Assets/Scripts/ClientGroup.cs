@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-using UnityEngine.UI;
-
 public class ClientGroup : MonoBehaviour
 {
     public bool IsSitting { get; set; }
     public float contactRadius = 3f;
+    [SerializeField] private Order order;
+    public Order Order => order;
     public List<Costumer> costumers;
     public State State { get; set; }
     public float patienceTime = 60f;
@@ -23,9 +23,36 @@ public class ClientGroup : MonoBehaviour
 
     private void Update()
     {
-        SatisfactionAmount -= Time.deltaTime / patienceTime;
+        switch (State)
+        {
+            case State.WAITING:
+                SatisfactionAmount -= Time.deltaTime / patienceTime;
+                ChangeState(State.SIT);
+                break;
+            case State.SIT:
+                SatisfactionAmount -= Time.deltaTime / patienceTime;
+                ChangeState(State.ORDING);
+                break;
+            case State.ORDING:
+                SatisfactionAmount -= Time.deltaTime / patienceTime;
+                ChangeState(State.WAITING_ORDER);
+                break;
+            case State.WAITING_ORDER:
+                SatisfactionAmount -= Time.deltaTime / patienceTime;
+                ChangeState(State.EATING);
+                break;
+            case State.EATING:
+                ChangeState(State.FINISH);
+                break;
+            case State.FINISH:
+                break;
+        }
     }
-
+    private void ChangeState(State nextState)
+    {
+        SatisfactionAmount = Mathf.Clamp01(SatisfactionAmount * 1.2f);
+        State = nextState;
+    }
     #region Drag&Drop
     private void OnMouseDown()
     {
