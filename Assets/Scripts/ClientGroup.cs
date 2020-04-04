@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ClientGroup : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class ClientGroup : MonoBehaviour
     public List<Costumer> costumers;
     public State State { get; set; }
     public float patienceTime = 60f;
+    public float timeToOrder = 3f;
+    public float eatingTime = 10f;
     [Range(0, 1)] public float SatisfactionAmount;
     private Vector3 orignalPos;
     private Dragger dragger;
     private bool draggin;
+    private bool eating;
+    private bool orded;
     private void Start()
     {
         orignalPos = transform.position;
@@ -27,26 +32,41 @@ public class ClientGroup : MonoBehaviour
         {
             case State.WAITING:
                 SatisfactionAmount -= Time.deltaTime / patienceTime;
-                ChangeState(State.SIT);
+
+                if (IsSitting)
+                    ChangeState(State.SIT);
                 break;
             case State.SIT:
                 SatisfactionAmount -= Time.deltaTime / patienceTime;
-                ChangeState(State.ORDING);
-                break;
-            case State.ORDING:
-                SatisfactionAmount -= Time.deltaTime / patienceTime;
-                ChangeState(State.WAITING_ORDER);
+                if(orded)
+                StartCoroutine(Ording());
                 break;
             case State.WAITING_ORDER:
                 SatisfactionAmount -= Time.deltaTime / patienceTime;
-                ChangeState(State.EATING);
+                //TODO añadir uan forma que el juegador interactue para pasar;
+                if (Order.IsReady)
+                    ChangeState(State.EATING);
                 break;
             case State.EATING:
-                ChangeState(State.FINISH);
+                if (!eating)
+                    StartCoroutine(Eat());
                 break;
             case State.FINISH:
+            Destroy(gameObject,1f);
                 break;
         }
+    }
+    private IEnumerator Ording()
+    {
+        orded = true;
+        yield return new WaitForSeconds(timeToOrder);
+        ChangeState(State.WAITING_ORDER);
+    }
+    private IEnumerator Eat()
+    {
+        eating = true;
+        yield return new WaitForSeconds(eatingTime);
+        ChangeState(State.FINISH);
     }
     private void ChangeState(State nextState)
     {

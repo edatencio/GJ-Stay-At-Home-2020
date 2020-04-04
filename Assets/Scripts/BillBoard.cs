@@ -3,13 +3,16 @@ using UnityEngine;
 public class BillBoard : MonoBehaviour
 {
     private Camera cam;
-    private void Start() {
+    float orignalRotY;
+    private void Start()
+    {
+        orignalRotY = transform.rotation.eulerAngles.y;
         cam = Camera.main;
     }
-    private void Update() 
+    private void Update()
     {
-        transform.LookAt(cam.transform , Vector3.up);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90,0);
+        transform.LookAt(cam.transform);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,orignalRotY,transform.rotation.eulerAngles.z);
     }
 }
 
