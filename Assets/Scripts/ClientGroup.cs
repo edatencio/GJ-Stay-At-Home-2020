@@ -38,8 +38,8 @@ public class ClientGroup : MonoBehaviour
                 break;
             case State.SIT:
                 SatisfactionAmount -= Time.deltaTime / patienceTime;
-                if(orded)
-                StartCoroutine(Ording());
+                if (orded)
+                    StartCoroutine(Ording());
                 break;
             case State.WAITING_ORDER:
                 SatisfactionAmount -= Time.deltaTime / patienceTime;
@@ -52,7 +52,7 @@ public class ClientGroup : MonoBehaviour
                     StartCoroutine(Eat());
                 break;
             case State.FINISH:
-            Destroy(gameObject,1f);
+                Destroy(gameObject, 1f);
                 break;
         }
     }
@@ -76,6 +76,7 @@ public class ClientGroup : MonoBehaviour
     #region Drag&Drop
     private void OnMouseDown()
     {
+        Debug.Log(IsSitting);
         if (!IsSitting)
             if (Input.GetMouseButtonDown(0))
             {
@@ -85,7 +86,6 @@ public class ClientGroup : MonoBehaviour
                 transform.position += Vector3.up * 0.5f;
             }
     }
-
     private void OnMouseUp()
     {
         if (!Input.GetMouseButtonDown(0))
@@ -103,11 +103,12 @@ public class ClientGroup : MonoBehaviour
                 if (table != null && !table.IsTaken && table.Seats.Count >= costumers.Count)
                 {
                     IsSitting = true;
+
                     table.SetCostumer(this);
                     return;
                 }
+                transform.position = orignalPos;
             }
-            transform.position = orignalPos;
         }
     }
     private void OnDrawGizmos()
