@@ -155,7 +155,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
         type: 3}
+      propertyPath: clients.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
       propertyPath: costumers.Array.data[1]
+      value: 
+      objectReference: {fileID: 5715479122372801254}
+    - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: clients.Array.data[1]
       value: 
       objectReference: {fileID: 5715479122372801254}
     - target: {fileID: 8477792763051692664, guid: db762a2c1b272c74eadda2e82af1e9e4,

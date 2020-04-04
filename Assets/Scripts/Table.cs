@@ -19,7 +19,7 @@ public class Table : Interactable
         State = InteractableState.Receive;
     }
 
-    public void SetCostumer(ClientGroup clientGroup)
+    public void SetClientGroup(ClientGroup clientGroup)
     {
         this.clientGroup = clientGroup;
         IsTaken = true;

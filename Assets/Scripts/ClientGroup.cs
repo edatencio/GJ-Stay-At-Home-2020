@@ -125,19 +125,18 @@ public class ClientGroup : MonoBehaviour
     #region Drag&Drop
     private void OnMouseDown()
     {
-        if (!IsSitting)
-            if (Input.GetMouseButtonDown(0))
-            {
-                isDragging = true;
-                dragger.CanDrag = true;
-
-                transform.position += Vector3.up * 0.5f;
-            }
+        if (!IsSitting && Input.GetMouseButtonDown(0))
+        {
+            isDragging = true;
+            dragger.CanDrag = true;
+            transform.position += Vector3.up * 0.5f;
+        }
     }
 
     private void OnMouseUp()
     {
-        if (IsSitting) return;
+        if (IsSitting)
+            return;
 
         if (!Input.GetMouseButtonDown(0))
         {
@@ -155,7 +154,9 @@ public class ClientGroup : MonoBehaviour
                 {
                     IsSitting = true;
                     this.table = table;
-                    table.SetCostumer(this);
+                    table.SetClientGroup(this);
+                    GetComponent<Collider>().enabled = false;
+
                     return;
                 }
                 else
