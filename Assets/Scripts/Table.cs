@@ -12,7 +12,10 @@ public class Table : MonoBehaviour, IInteractable
     public bool IsTaken { get; private set; }
 
     public Transform NavMeshTarget => navMeshTarget;
-
+    private void Start()
+    {
+        Restaurant.ClientLeave += OnClientLeave;
+    }
     public void SetCostumer(ClientGroup clientGroup)
     {
         this.clientGroup = clientGroup;
@@ -22,6 +25,16 @@ public class Table : MonoBehaviour, IInteractable
             clientGroup.costumers[i].transform.position = Seats[i].transform.position;
     }
 
+    private void OnClientLeave()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        Restaurant.ClientLeave -= OnClientLeave;
+
+    }
     public void Interact()
     {
         Log.Message(name, "Interact");
