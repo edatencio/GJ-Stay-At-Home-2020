@@ -36,7 +36,10 @@ public class Table : Interactable
     private void OnClientLeave(ClientGroup client)
     {
         if (client == clientGroup)
+        {
             IsTaken = false;
+            State = InteractableState.Receive;
+        }
     }
 
     protected override void OnItemSet()
