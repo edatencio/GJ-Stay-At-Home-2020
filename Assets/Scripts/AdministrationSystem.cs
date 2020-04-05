@@ -14,11 +14,30 @@ public class AdministrationSystem : MonoBehaviour
     public Bar gotaGotaBar;
     public Bar restaurantBar;
 
+    private void OpenResultPanel()
+    {
+        resultPanel.gameObject.SetActive(true);
+    }
+    public void OpenAdminPanel()
+    {
+        resultPanel.SetActive(false);
+        administrationPanel.SetActive(true);
+    }
+    private void Awake()
+    {
+        administrationPanel.SetActive(false);
+        resultPanel.SetActive(false);
+    }
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         Bar.AddedPoint += PointAdded;
         Bar.OnMouseEnter += ShowDescription;
         Bar.OnMouseExit += HideDescription;
+        Round.RoundOver += OpenResultPanel;
+
+
     }
 
     private void HideDescription()
@@ -49,7 +68,7 @@ public class AdministrationSystem : MonoBehaviour
     }
     public void ClosePanel()
     {
-         familyBar.plusButton.interactable = true;
+        familyBar.plusButton.interactable = true;
         impuestoBar.plusButton.interactable = true;
         gotaGotaBar.plusButton.interactable = true;
         restaurantBar.plusButton.interactable = true;

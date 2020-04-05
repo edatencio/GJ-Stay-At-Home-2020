@@ -35,6 +35,7 @@ public class Round : MonoBehaviour
         {
             if (!timeOver)
             {
+                Debug.Log("Time is Over!");
                 CloseTime?.Invoke();
                 timeOver = true;
             }
@@ -54,6 +55,7 @@ public class Round : MonoBehaviour
         if (!roundFinished)
         {
             roundFinished = true;
+            Debug.Log("Round is Over!");
             RoundOver?.Invoke();
         }
     }

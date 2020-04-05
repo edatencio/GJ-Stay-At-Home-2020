@@ -17,6 +17,7 @@ public class Restaurant : MonoBehaviour
     private List<ClientGroup> clientsInRestaurant = new List<ClientGroup>();
     public List<ClientGroup> ClientsInRestaurant => clientsInRestaurant;
     public float SatisfactionTotal;
+    public int clientCount;
 
     public void AddClient(ClientGroup client)
     {
@@ -25,8 +26,11 @@ public class Restaurant : MonoBehaviour
     public void LeaveRestaurant(ClientGroup client)
     {
         SatisfactionTotal += client.SatisfactionAmount;
+        if (client.SatisfactionAmount >= 0)
+            clientCount++;
+            
         ClientsInRestaurant.Remove(client);
-        Destroy(client.gameObject,1f);
+        Destroy(client.gameObject, 1f);
         ClientLeave?.Invoke();
     }
 }
