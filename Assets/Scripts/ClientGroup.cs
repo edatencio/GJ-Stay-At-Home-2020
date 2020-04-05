@@ -102,15 +102,12 @@ public class ClientGroup : MonoBehaviour
                 break;
 
             case ClientGroupState.Finish:
-
-                // TODO if satisfaction is cero, leave restaurant
-                Restaurant.instance.LeaveRestaurant(this);
-                //Destroy(gameObject);
+                LeaveRestaurant();
                 break;
         }
-        if (SatisfactionAmount <= 0)
-            Restaurant.instance.LeaveRestaurant(this);
 
+        if (SatisfactionAmount <= 0)
+            LeaveRestaurant();
     }
 
     private IEnumerator Ording()
@@ -125,6 +122,8 @@ public class ClientGroup : MonoBehaviour
         yield return new WaitForSeconds(eatingTime);
         Destroy(order.gameObject);
         ChangeState(ClientGroupState.Finish);
+
+        // TODO poner platos sucios en la mesa
     }
 
     private void ChangeState(ClientGroupState nextState)
@@ -183,4 +182,15 @@ public class ClientGroup : MonoBehaviour
     }
 
     #endregion Drag&Drop
+
+    private void LeaveRestaurant()
+    {
+        if (State == ClientGroupState.WaitingOrder)
+        {
+            table.TryGetItem<Order>(out IInteractableItem item);
+            Destroy(item.gameObject);
+        }
+
+        Restaurant.instance.LeaveRestaurant(this);
+    }
 }
