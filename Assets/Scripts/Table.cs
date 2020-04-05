@@ -6,8 +6,11 @@ using System;
 public class Table : Interactable
 {
     [SerializeField] private Transform itemTarget;
-    [ReorderableList] public List<Seat> Seats;
+    [SerializeField] private Transform satisfactionSliderTarget;
+    [SerializeField, ReorderableList] private List<Transform> seats;
     public ClientGroup clientGroup { get; private set; }
+
+    public int SeatCount => seats.Count;
 
     public bool IsTaken { get; private set; }
 
@@ -24,8 +27,10 @@ public class Table : Interactable
         this.clientGroup = clientGroup;
         IsTaken = true;
 
+        clientGroup.SatisfactionSlider.transform.position = satisfactionSliderTarget.position;
+
         for (int i = 0; i < clientGroup.clients.Count; i++)
-            clientGroup.clients[i].transform.position = Seats[i].transform.position;
+            clientGroup.clients[i].transform.position = seats[i].transform.position;
     }
 
     private void OnClientLeave()
