@@ -31,7 +31,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             count++;
 
-            bar.fillAmount += count / 3f;
+            bar.fillAmount = count / 3f;
             Debug.Log(bar.fillAmount);
             AddedPoint?.Invoke();
         }
