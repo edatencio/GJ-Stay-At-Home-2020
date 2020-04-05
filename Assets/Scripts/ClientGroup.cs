@@ -18,7 +18,7 @@ public class ClientGroup : MonoBehaviour
     private Vector3 orignalPos;
     private Dragger dragger;
     private bool eating;
-    private bool orded;
+    private bool ordered;
 
     private Order order;
 
@@ -55,18 +55,21 @@ public class ClientGroup : MonoBehaviour
 
             case ClientGroupState.WaitingMenu:
                 {
-                    SatisfactionAmount -= Time.deltaTime / patienceTime;
-
-                    if (table.TryGetItem<Menu>(out IInteractableItem item))
+                    if (!ordered)
                     {
-                        if (item is Menu)
+                        SatisfactionAmount -= Time.deltaTime / patienceTime;
+
+                        if (table.TryGetItem<Menu>(out IInteractableItem item))
                         {
-                            table.ClearItem();
-                            StartCoroutine(Ording());
-                        }
-                        else
-                        {
-                            table.SetItem(item);
+                            if (item is Menu)
+                            {
+                                table.ClearItem();
+                                StartCoroutine(Ording());
+                            }
+                            else
+                            {
+                                table.SetItem(item);
+                            }
                         }
                     }
                 }
@@ -112,6 +115,7 @@ public class ClientGroup : MonoBehaviour
 
     private IEnumerator Ording()
     {
+        ordered = true;
         yield return new WaitForSeconds(timeToOrder);
         ChangeState(ClientGroupState.Order);
     }
