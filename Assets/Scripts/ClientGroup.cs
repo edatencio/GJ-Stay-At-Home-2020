@@ -5,14 +5,14 @@ using NaughtyAttributes;
 
 public class ClientGroup : MonoBehaviour
 {
-    public float contactRadius = 3f;
-    public float patienceTime = 60f;
-    public float timeToOrder = 3f;
-    public float eatingTime = 10f;
-
-    [Range(0, 1)] public float SatisfactionAmount;
-    [SerializeField] private GameObject orderPrefab;
-    [ReorderableList] public List<Client> clients;
+    [SerializeField, BoxGroup("Settings")] private float contactRadius = 3f;
+    [SerializeField, BoxGroup("Settings")] private float patienceTime = 60f;
+    [SerializeField, BoxGroup("Settings")] private float timeToOrder = 3f;
+    [SerializeField, BoxGroup("Settings")] private float eatingTime = 10f;
+    [Range(0, 1), BoxGroup("Settings")] public float SatisfactionAmount;
+    [SerializeField, BoxGroup("References")] private GameObject orderPrefab;
+    [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
+    [ReorderableList, BoxGroup("References")] public List<Client> clients;
 
     private Table table;
     private Vector3 orignalPos;
@@ -30,6 +30,8 @@ public class ClientGroup : MonoBehaviour
     public bool IsSitting { get; set; }
 
     public bool isDragging { get; private set; }
+
+    public GameObject SatisfactionSlider => satisfactionSlider;
 
     private void Start()
     {
@@ -150,7 +152,7 @@ public class ClientGroup : MonoBehaviour
             {
                 table = collider.GetComponent<Table>();
 
-                if (table != null && !table.IsTaken && table.Seats.Count >= clients.Count)
+                if (table != null && !table.IsTaken && table.SeatCount >= clients.Count)
                 {
                     IsSitting = true;
                     this.table = table;
