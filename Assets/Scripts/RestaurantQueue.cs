@@ -7,7 +7,7 @@ public class RestaurantQueue : MonoBehaviour
 {
     private List<ClientGroup> clientQueue = new List<ClientGroup>();
     public float delayBetweenClient = 5f;
-    [SerializeField]private bool canAdd = true;
+    [SerializeField] private bool canAdd = true;
     public int MaxCapacity = 5;
     private void Awake()
     {
@@ -51,11 +51,12 @@ public class RestaurantQueue : MonoBehaviour
 
     IEnumerator AddToTheQueue()
     {
+        var currentRoundStast = RoundManager.instance.CurrentRoundStats;
         canAdd = false;
-        yield return new WaitForSeconds(delayBetweenClient);
+        yield return new WaitForSeconds(currentRoundStast.delayBetweenClient);
 
         canAdd = true;
-        var prefabs = RoundManager.instance.CurrentRoundStats.clientsPrefabs;
+        var prefabs = currentRoundStast.clientsPrefabs;
         var client = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Count)], transform);
         clientQueue.Add(client);
         Restaurant.instance.AddClient(client);
