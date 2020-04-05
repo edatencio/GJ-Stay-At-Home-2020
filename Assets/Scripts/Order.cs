@@ -7,30 +7,12 @@ public class Order : MonoBehaviour, IInteractableItem
 
     [HideInInspector] public Table table;
     private bool _isCooked;
-    private GameObject _model;
+    private GameObject _mesh;
 
-    public int Count { get; private set; }
+    private static GameObject parent;
+    private static int ordersCount;
 
-    public GameObject Model
-    {
-        get
-        {
-            if (_model == null)
-            {
-                _model = new GameObject();
-
-                orderModel.transform.SetParent(_model.transform);
-                orderModel.transform.localPosition = Vector3.zero;
-
-                foodModel.transform.SetParent(_model.transform);
-                foodModel.transform.localPosition = Vector3.zero;
-
-                SetModels();
-            }
-
-            return _model;
-        }
-    }
+    public int Count { get; set; }
 
     public bool IsCooked
     {
@@ -55,5 +37,11 @@ public class Order : MonoBehaviour, IInteractableItem
             foodModel.SetActive(false);
             orderModel.SetActive(true);
         }
+    }
+
+    public void Setup(int count)
+    {
+        Count = count;
+        IsCooked = false;
     }
 }

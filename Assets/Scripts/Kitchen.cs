@@ -36,7 +36,7 @@ public class Kitchen : Interactable
 
     protected override void OnItemSet()
     {
-        currentItem.Model.transform.position = itemTarget.position;
+        currentItem.transform.position = itemTarget.position;
         StartCoroutine(Cook());
     }
 

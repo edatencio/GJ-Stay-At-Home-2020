@@ -1427,7 +1427,7 @@ MonoBehaviour:
   itemsPosition:
   - {fileID: 727370866}
   - {fileID: 1944964314}
-  menuPrefab: {fileID: 8838601278504271183, guid: dc987d35823fb4345a5c03916c7e44b1,
+  menuPrefab: {fileID: 3985483739980631907, guid: ea55a99cb0808704383c70f8a3bad6d5,
     type: 3}
 --- !u!1 &1868703062
 GameObject:

@@ -2,5 +2,7 @@ using UnityEngine;
 
 public interface IInteractableItem
 {
-    GameObject Model { get; }
+    GameObject gameObject { get; }
+
+    Transform transform { get; }
 }

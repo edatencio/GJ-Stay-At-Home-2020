@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         items[0] = Instantiate(menuPrefab).GetComponent<IInteractableItem>();
-        items[0].Model.transform.position = itemsPosition[0].position;
-        items[0].Model.transform.SetParent(itemsPosition[0]);
+        items[0].transform.position = itemsPosition[0].position;
+        items[0].transform.SetParent(itemsPosition[0]);
     }
 
     private void Update()
@@ -94,8 +94,8 @@ public class PlayerController : MonoBehaviour
             if (items[i] == null)
             {
                 items[i] = item;
-                items[i].Model.transform.position = itemsPosition[i].position;
-                items[i].Model.transform.SetParent(itemsPosition[i]);
+                items[i].transform.position = itemsPosition[i].position;
+                items[i].transform.SetParent(itemsPosition[i]);
                 return;
             }
         }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             if (items[i] != null && destination.SetItem(items[i]))
             {
-                items[i].Model.transform.SetParent(null);
+                items[i].transform.SetParent(null);
                 items[i] = null;
             }
         }

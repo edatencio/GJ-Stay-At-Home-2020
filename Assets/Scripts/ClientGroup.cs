@@ -61,8 +61,7 @@ public class ClientGroup : MonoBehaviour
                     {
                         if (item is Menu)
                         {
-                            Destroy(item as Menu);
-                            ChangeState(ClientGroupState.Order);
+                            Destroy(item.gameObject);
                             StartCoroutine(Ording());
                         }
                         else
@@ -75,7 +74,10 @@ public class ClientGroup : MonoBehaviour
 
             case ClientGroupState.Order:
                 {
-                    table.SetItem(Instantiate(orderPrefab).GetComponent<Order>());
+                    order = Instantiate(orderPrefab).GetComponent<Order>();
+                    order.Setup(clients.Count);
+
+                    table.SetItem(order);
                     ChangeState(ClientGroupState.WaitingOrder);
                 }
                 break;
@@ -100,7 +102,10 @@ public class ClientGroup : MonoBehaviour
                 break;
 
             case ClientGroupState.Finish:
-                Restaurant.instance.LeaveRestaurant(this);
+
+                // TODO if satisfaction is cero, leave restaurant
+                //Restaurant.instance.LeaveRestaurant(this);
+                Destroy(gameObject);
                 break;
         }
     }
@@ -115,6 +120,7 @@ public class ClientGroup : MonoBehaviour
     {
         eating = true;
         yield return new WaitForSeconds(eatingTime);
+        Destroy(order.gameObject);
         ChangeState(ClientGroupState.Finish);
     }
 

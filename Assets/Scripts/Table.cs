@@ -44,7 +44,7 @@ public class Table : Interactable
 
     protected override void OnItemSet()
     {
-        currentItem.Model.transform.position = itemTarget.position;
+        currentItem.transform.position = itemTarget.position;
         State = InteractableState.Emit;
     }
 
