@@ -18,7 +18,7 @@ public class ClientGroup : MonoBehaviour
     private Vector3 orignalPos;
     private Dragger dragger;
     private bool eating;
-    private bool orded;
+    private bool ordered;
 
     private Order order;
 
@@ -55,18 +55,21 @@ public class ClientGroup : MonoBehaviour
 
             case ClientGroupState.WaitingMenu:
                 {
-                    SatisfactionAmount -= Time.deltaTime / patienceTime;
-
-                    if (table.TryGetItem<Menu>(out IInteractableItem item))
+                    if (!ordered)
                     {
-                        if (item is Menu)
+                        SatisfactionAmount -= Time.deltaTime / patienceTime;
+
+                        if (table.TryGetItem<Menu>(out IInteractableItem item))
                         {
-                            table.ClearItem();
-                            StartCoroutine(Ording());
-                        }
-                        else
-                        {
-                            table.SetItem(item);
+                            if (item is Menu)
+                            {
+                                table.ClearItem();
+                                StartCoroutine(Ording());
+                            }
+                            else
+                            {
+                                table.SetItem(item);
+                            }
                         }
                     }
                 }
@@ -102,19 +105,17 @@ public class ClientGroup : MonoBehaviour
                 break;
 
             case ClientGroupState.Finish:
-
-                // TODO if satisfaction is cero, leave restaurant
-                Restaurant.instance.LeaveRestaurant(this);
-                //Destroy(gameObject);
+                LeaveRestaurant();
                 break;
         }
-        if (SatisfactionAmount <= 0)
-            Restaurant.instance.LeaveRestaurant(this);
 
+        if (SatisfactionAmount <= 0)
+            LeaveRestaurant();
     }
 
     private IEnumerator Ording()
     {
+        ordered = true;
         yield return new WaitForSeconds(timeToOrder);
         ChangeState(ClientGroupState.Order);
     }
@@ -125,6 +126,8 @@ public class ClientGroup : MonoBehaviour
         yield return new WaitForSeconds(eatingTime);
         Destroy(order.gameObject);
         ChangeState(ClientGroupState.Finish);
+
+        // TODO poner platos sucios en la mesa
     }
 
     private void ChangeState(ClientGroupState nextState)
@@ -183,4 +186,15 @@ public class ClientGroup : MonoBehaviour
     }
 
     #endregion Drag&Drop
+
+    private void LeaveRestaurant()
+    {
+        if (State == ClientGroupState.WaitingOrder)
+        {
+            table.TryGetItem<Order>(out IInteractableItem item);
+            Destroy(item.gameObject);
+        }
+
+        Restaurant.instance.LeaveRestaurant(this);
+    }
 }
