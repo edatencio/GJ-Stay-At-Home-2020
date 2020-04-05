@@ -8,7 +8,6 @@ public class RestaurantQueue : MonoBehaviour
     private List<ClientGroup> clientQueue = new List<ClientGroup>();
     public float delayBetweenClient = 5f;
     [SerializeField] private bool canAdd = true;
-    public int MaxCapacity = 5;
     private void Awake()
     {
         Round.CloseTime += CloseQueue;
@@ -45,7 +44,7 @@ public class RestaurantQueue : MonoBehaviour
 
     private void Update()
     {
-        if (Restaurant.instance.ClientsInRestaurant.Count < MaxCapacity && canAdd)
+        if (Restaurant.instance.ClientsInRestaurant.Count < Restaurant.instance.MaxCapacity && canAdd)
             StartCoroutine(AddToTheQueue());
     }
 

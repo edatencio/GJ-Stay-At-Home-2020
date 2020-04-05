@@ -5,6 +5,7 @@ using System;
 public class Restaurant : MonoBehaviour
 {
     public static Restaurant instance;
+    public int MaxCapacity = 5;
 
     public static event Action<ClientGroup> ClientLeave;
     private void Awake()
