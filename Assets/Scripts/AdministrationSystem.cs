@@ -4,6 +4,7 @@ using System;
 
 public class AdministrationSystem : MonoBehaviour
 {
+    public static AdministrationSystem instance;
     public static event Action OnClose;
     public GameObject resultPanel;
     public GameObject administrationPanel;
@@ -25,6 +26,13 @@ public class AdministrationSystem : MonoBehaviour
     }
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         administrationPanel.SetActive(false);
         resultPanel.SetActive(false);
     }
@@ -36,8 +44,6 @@ public class AdministrationSystem : MonoBehaviour
         Bar.OnMouseEnter += ShowDescription;
         Bar.OnMouseExit += HideDescription;
         Round.RoundOver += OpenResultPanel;
-
-
     }
 
     private void HideDescription()

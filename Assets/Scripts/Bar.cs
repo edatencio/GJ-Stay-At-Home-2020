@@ -10,6 +10,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static event Action OnMouseExit;
     [SerializeField] protected Image bar;
     [SerializeField, Range(0, 3)] protected int count = 0;
+    public int Count => count;
     public Button plusButton;
     public BarDescription description;
 

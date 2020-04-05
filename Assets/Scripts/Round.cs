@@ -6,6 +6,7 @@ public class Round : MonoBehaviour
     [SerializeField] private float elapsedTime;
     [SerializeField] private float roundTime;
     [SerializeField] private Image watch;
+    [SerializeField] private RoundStarter roundStarter;
     public int level = 0;
     public float Roundtime => roundTime;
     private bool timeOver = false;
@@ -18,10 +19,6 @@ public class Round : MonoBehaviour
 
     public void StartRound()
     {
-        Invoke(nameof(StartWithDelay), 2f);
-    }
-    private void StartWithDelay()
-    {
         var stats = RoundManager.instance.GetRound();
         roundTime = stats.roundTime;
         timeOver = false;
@@ -31,15 +28,6 @@ public class Round : MonoBehaviour
         isRunning = true;
         RoundStart?.Invoke();
     }
-    private void Awake()
-    {
-        AdministrationSystem.OnClose += StartRound;
-    }
-    private void Start()
-    {
-        StartRound();
-    }
-
     private void Update()
     {
         if (!isRunning) return;
