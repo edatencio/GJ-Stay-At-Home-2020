@@ -39,8 +39,8 @@ public class RestaurantQueue : MonoBehaviour
 
     private void CloseQueue()
     {
+        StopAllCoroutines();
         canAdd = false;
-        StopCoroutine(AddToTheQueue());
     }
 
     private void Update()
