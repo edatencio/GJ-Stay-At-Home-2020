@@ -39,11 +39,9 @@ public class Table : Interactable
             IsTaken = false;
     }
 
-
-
     protected override void OnItemSet()
     {
-        currentItem.transform.position = itemTarget.position;
+        CurrentItem.transform.position = itemTarget.position;
         State = InteractableState.Emit;
     }
 

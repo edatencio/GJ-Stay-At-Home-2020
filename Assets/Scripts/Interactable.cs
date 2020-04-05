@@ -5,7 +5,8 @@ using System;
 public abstract class Interactable : MonoBehaviour
 {
     [SerializeField] private Transform navMeshTarget;
-    protected IInteractableItem currentItem;
+
+    protected virtual IInteractableItem CurrentItem { get; set; }
 
     abstract protected Type itemType { get; }
 
@@ -24,7 +25,7 @@ public abstract class Interactable : MonoBehaviour
     {
         if (State == InteractableState.Receive && SameType(itemType, item.GetType()))
         {
-            currentItem = item;
+            CurrentItem = item;
             OnItemSet();
             return true;
         }
@@ -34,10 +35,10 @@ public abstract class Interactable : MonoBehaviour
 
     public bool TryGetItem<T>(out IInteractableItem item)
     {
-        if (currentItem is T)
+        if (CurrentItem is T)
         {
-            item = currentItem;
-            currentItem = null;
+            item = CurrentItem;
+            CurrentItem = null;
             OnItemGet();
             return true;
         }

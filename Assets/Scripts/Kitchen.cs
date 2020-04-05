@@ -21,7 +21,7 @@ public class Kitchen : Interactable
     {
         if (State == InteractableState.Receive && SameType(itemType, item.GetType()) && !(item as Order).IsCooked)
         {
-            currentItem = item;
+            CurrentItem = item;
             OnItemSet();
             return true;
         }
@@ -36,7 +36,7 @@ public class Kitchen : Interactable
 
     protected override void OnItemSet()
     {
-        currentItem.transform.position = itemTarget.position;
+        CurrentItem.transform.position = itemTarget.position;
         StartCoroutine(Cook());
     }
 
@@ -45,7 +45,7 @@ public class Kitchen : Interactable
         clock.SetActive(true);
         State = InteractableState.Idle;
         yield return new WaitForSeconds(cookTime);
-        (currentItem as Order).IsCooked = true;
+        (CurrentItem as Order).IsCooked = true;
         clock.SetActive(false);
         State = InteractableState.Emit;
     }

@@ -8,17 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private NavMeshAgent navMesh;
     [SerializeField, ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
-    [SerializeField, BoxGroup("Debug")] private GameObject menuPrefab;
-
     private IInteractableItem[] items = new IInteractableItem[2];
     private Interactable destination;
     private bool interacted;
+    private bool alternateHand;
 
     private void Start()
     {
-        items[0] = Instantiate(menuPrefab).GetComponent<IInteractableItem>();
-        items[0].transform.position = itemsPosition[0].position;
-        items[0].transform.SetParent(itemsPosition[0]);
     }
 
     private void Update()
@@ -103,14 +99,21 @@ public class PlayerController : MonoBehaviour
 
     private void SetItem()
     {
+        alternateHand = !alternateHand;
+
         for (int i = 0; i < items.Length; i++)
         {
+            i = alternateHand ? items.Length - 1 - i : i;
+
             if (items[i] != null && destination.SetItem(items[i]))
             {
                 items[i].transform.SetParent(null);
                 items[i] = null;
+                return;
             }
         }
+
+        destination.SetItem(new GameObject("Menu").AddComponent<Menu>());
     }
 }
 
