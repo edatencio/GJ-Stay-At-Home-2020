@@ -2,10 +2,12 @@
 using UnityEngine;
 using NaughtyAttributes;
 using System;
+using UnityEngine.UI;
 public class Round : MonoBehaviour
 {
     [SerializeField] private float elapsedTime;
     [SerializeField] private float roundTime;
+    [SerializeField] private Image watch;
     public int level = 0;
     public float Roundtime => roundTime;
     private bool timeOver = false;
@@ -23,6 +25,10 @@ public class Round : MonoBehaviour
         elapsedTime = 0;
         level++;
     }
+    private void Awake()
+    {
+        AdministrationSystem.OnClose += StartRound;
+    }
     private void Start()
     {
         StartRound();
@@ -30,7 +36,6 @@ public class Round : MonoBehaviour
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime / roundTime;
         if (elapsedTime >= 1)
         {
             if (!timeOver)
@@ -40,6 +45,11 @@ public class Round : MonoBehaviour
                 timeOver = true;
             }
         }
+        else
+        {
+            elapsedTime += Time.deltaTime / roundTime;
+            watch.fillAmount = elapsedTime;
+        }
         if (timeOver)
         {
             if (Restaurant.instance.ClientsInRestaurant.Count <= 0)
@@ -47,7 +57,6 @@ public class Round : MonoBehaviour
                 Invoke(nameof(FinishRound), 3f);
             }
         }
-
     }
 
     private void FinishRound()

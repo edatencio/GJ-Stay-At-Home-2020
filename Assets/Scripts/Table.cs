@@ -33,14 +33,13 @@ public class Table : Interactable
             clientGroup.clients[i].transform.position = seats[i].transform.position;
     }
 
-    private void OnClientLeave()
+    private void OnClientLeave(ClientGroup client)
     {
+        if (client == clientGroup)
+            IsTaken = false;
     }
 
-    private void OnDestroy()
-    {
-        Restaurant.ClientLeave -= OnClientLeave;
-    }
+
 
     protected override void OnItemSet()
     {

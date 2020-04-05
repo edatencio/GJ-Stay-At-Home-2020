@@ -12,6 +12,7 @@ public class RestaurantQueue : MonoBehaviour
     private void Awake()
     {
         Round.CloseTime += CloseQueue;
+        Restaurant.ClientLeave += OnclientLeave;
     }
     private void OnDestroy()
     {
@@ -46,9 +47,13 @@ public class RestaurantQueue : MonoBehaviour
         var client = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Count)], transform);
         clientQueue.Add(client);
         Restaurant.instance.AddClient(client);
-
-
     }
+
+    private void OnclientLeave(ClientGroup client)
+    {
+        clientQueue.Remove(client);
+    }
+
 
     private void LateUpdate()
     {

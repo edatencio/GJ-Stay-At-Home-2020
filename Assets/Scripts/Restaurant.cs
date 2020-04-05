@@ -6,7 +6,7 @@ public class Restaurant : MonoBehaviour
 {
     public static Restaurant instance;
 
-    public static event Action ClientLeave;
+    public static event Action<ClientGroup> ClientLeave;
     private void Awake()
     {
         if (instance == null)
@@ -28,9 +28,9 @@ public class Restaurant : MonoBehaviour
         SatisfactionTotal += client.SatisfactionAmount;
         if (client.SatisfactionAmount >= 0)
             clientCount++;
-            
+
         ClientsInRestaurant.Remove(client);
+        ClientLeave?.Invoke(client);
         Destroy(client.gameObject, 1f);
-        ClientLeave?.Invoke();
     }
 }
