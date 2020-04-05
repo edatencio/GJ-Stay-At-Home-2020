@@ -72,9 +72,9 @@ public class AdministrationSystem : MonoBehaviour
         impuestoBar.plusButton.interactable = true;
         gotaGotaBar.plusButton.interactable = true;
         restaurantBar.plusButton.interactable = true;
-        administrationPanel.gameObject.SetActive(false);
-        resultPanel.gameObject.SetActive(false);
         OnClose?.Invoke();
+        resultPanel.gameObject.SetActive(false);
+        administrationPanel.gameObject.SetActive(false);
     }
 }
 

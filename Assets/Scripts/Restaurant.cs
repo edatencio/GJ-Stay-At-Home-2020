@@ -31,6 +31,6 @@ public class Restaurant : MonoBehaviour
 
         ClientsInRestaurant.Remove(client);
         ClientLeave?.Invoke(client);
-        Destroy(client.gameObject, 1f);
+        Destroy(client.gameObject);
     }
 }

@@ -9,6 +9,7 @@ public class RoundManager : MonoBehaviour
     private Queue<RoundStats> roundQueue = new Queue<RoundStats>();
 
     public Queue<RoundStats> RoundQueue => roundQueue;
+    public RoundStats CurrentRoundStats { get; private set; }
     public event Action NoMoreRounds;
     private void Awake()
     {
@@ -16,7 +17,6 @@ public class RoundManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
-
 
         foreach (var item in rounds)
         {
@@ -26,7 +26,10 @@ public class RoundManager : MonoBehaviour
     public RoundStats GetRound()
     {
         if (roundQueue.Count > 0)
-            return roundQueue.Dequeue();
+        {
+            CurrentRoundStats = roundQueue.Dequeue();
+            return CurrentRoundStats;
+        }
         else
         {
             NoMoreRounds.Invoke();
