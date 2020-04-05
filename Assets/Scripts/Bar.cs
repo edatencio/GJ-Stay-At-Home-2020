@@ -12,7 +12,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField, Range(0, 3)] protected int count = 0;
     public int Count => count;
     public Button plusButton;
-    public BarDescription description;
+    public BarDescription descriptions;
 
 
     private void Start()
@@ -45,7 +45,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnMouseEnter?.Invoke(description.title, description.description);
+        OnMouseEnter?.Invoke(descriptions.info[count].title, descriptions.info[count].content);
     }
 
     public void OnPointerExit(PointerEventData eventData)
