@@ -1,7 +1,6 @@
 using UnityEngine;
 
 using UnityEngine.UI;
-[RequireComponent(typeof(ClientGroup))]
 public class SatisfactionBar : MonoBehaviour
 {
     [SerializeField]private Gradient colorGradient;
