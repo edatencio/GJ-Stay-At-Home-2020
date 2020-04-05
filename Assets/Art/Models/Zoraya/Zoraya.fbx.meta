@@ -1,12 +1,24 @@
 fileFormatVersion: 2
-guid: 69353ae87c695af4282507ed822dc185
+guid: ef7992ffb0324ae4b8ea4696fd20b65a
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: -1498010087492872569
-    second: CINEMA_4D_Main
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 6a34702e592d38f46a58cf677810af87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: cc18d3aef41bfb4489d5d22e2c2c2400, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: protagonista3_1
+    second: {fileID: 2800000, guid: b58a81a626e1026438e76d7969a9a0f6, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -18,7 +30,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -26,7 +39,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -75,7 +88,27 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Zoraya(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: CINEMA_4D_Editor
+      parentName: Zoraya(Clone)
+      position: {x: -12.2883215, y: 2.2506905, z: 8.222771}
+      rotation: {x: 0.018135266, y: 0.9556575, z: -0.0097523965, w: -0.2937598}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Disc
+      parentName: Zoraya(Clone)
+      position: {x: -1.5072643, y: 2.1455202, z: -0.019917907}
+      rotation: {x: 0.9983993, y: 0.036003083, z: -0.0015719285, w: 0.043591056}
+      scale: {x: 1, y: 1, z: 1}
+    - name: characterMedium
+      parentName: Zoraya(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -84,15 +117,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: characterMedium
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

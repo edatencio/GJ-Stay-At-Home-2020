@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
     [SerializeField] private NavMeshAgent navMesh;
+    [SerializeField] private Animator animator;
     [SerializeField, ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
     private IInteractableItem[] items = new IInteractableItem[2];
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, navMesh.angularSpeed * Time.deltaTime);
             }
         }
+
+        // Animations
+        animator.SetFloat(Constants.Player.Animations.Velocity, navMesh.velocity.magnitude);
+        animator.SetFloat(Constants.Player.Animations.RandomValue, Random.value);
     }
 
     private void FixedUpdate()
