@@ -61,7 +61,7 @@ public class ClientGroup : MonoBehaviour
                     {
                         if (item is Menu)
                         {
-                            Destroy(item.gameObject);
+                            table.ClearItem();
                             StartCoroutine(Ording());
                         }
                         else

@@ -49,4 +49,9 @@ public class Table : Interactable
     {
         State = InteractableState.Receive;
     }
+
+    public void ClearItem()
+    {
+        CurrentItem = null;
+    }
 }

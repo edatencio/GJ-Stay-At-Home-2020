@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 
     private IInteractableItem[] items = new IInteractableItem[2];
     private Interactable destination;
+    private Menu menu;
     private bool interacted;
     private bool alternateHand;
 
     private void Start()
     {
+        menu = new GameObject("Menu").AddComponent<Menu>();
     }
 
     private void Update()
@@ -113,7 +115,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        destination.SetItem(new GameObject("Menu").AddComponent<Menu>());
+        destination.SetItem(menu);
     }
 }
 
