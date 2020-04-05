@@ -191,8 +191,11 @@ public class ClientGroup : MonoBehaviour
     {
         if (State == ClientGroupState.WaitingOrder)
         {
-            table.TryGetItem<Order>(out IInteractableItem item);
-            Destroy(item.gameObject);
+            if (table.TryGetItem<Order>(out IInteractableItem item))
+            {
+                if (!(item as Order).IsCooked)
+                    Destroy(item.gameObject);
+            }
         }
 
         Restaurant.instance.LeaveRestaurant(this);
