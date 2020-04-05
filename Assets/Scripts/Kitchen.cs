@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class Kitchen : Interactable
 {
+    [SerializeField] private GameObject familyModel;
     [SerializeField] private float cookTime;
     [SerializeField] private KitchenClock clock;
     [SerializeField] private Transform itemTarget;
 
+    [SerializeField] private bool helpThisKitchen;
     protected override Type itemType => typeof(Order);
 
     private void Start()
@@ -19,6 +21,23 @@ public class Kitchen : Interactable
         State = InteractableState.Receive;
     }
 
+    private void OnEnable()
+    {
+        if (FamilyImprover.familyState == FamilyState.AllKitchen)
+        {
+            familyModel.SetActive(true);
+            cookTime = 3;
+
+        }
+        else if (FamilyImprover.familyState == FamilyState.OneKitchen && helpThisKitchen)
+        {
+            familyModel.SetActive(true);
+            cookTime = 3;
+        }
+        else
+            familyModel.SetActive(false);
+
+    }
     // Had to override SetItem to check if order is cooked
     public override bool SetItem(IInteractableItem item)
     {
