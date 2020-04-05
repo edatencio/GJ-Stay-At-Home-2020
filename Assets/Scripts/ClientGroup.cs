@@ -104,10 +104,13 @@ public class ClientGroup : MonoBehaviour
             case ClientGroupState.Finish:
 
                 // TODO if satisfaction is cero, leave restaurant
-                //Restaurant.instance.LeaveRestaurant(this);
-                Destroy(gameObject);
+                Restaurant.instance.LeaveRestaurant(this);
+                //Destroy(gameObject);
                 break;
         }
+        if (SatisfactionAmount <= 0)
+            Restaurant.instance.LeaveRestaurant(this);
+
     }
 
     private IEnumerator Ording()

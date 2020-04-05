@@ -12,11 +12,17 @@ public class Round : MonoBehaviour
     public float Roundtime => roundTime;
     private bool timeOver = false;
     private bool roundFinished = false;
+    private bool isRunning;
 
+    public static event Action RoundStart;
     public static event Action CloseTime;
     public static event Action RoundOver;
 
     public void StartRound()
+    {
+        Invoke(nameof(StartWithDelay), 2f);
+    }
+    private void StartWithDelay()
     {
         var stats = RoundManager.instance.GetRound();
         roundTime = stats.roundTime;
@@ -24,6 +30,8 @@ public class Round : MonoBehaviour
         roundFinished = false;
         elapsedTime = 0;
         level++;
+        isRunning = true;
+        RoundStart?.Invoke();
     }
     private void Awake()
     {
@@ -36,6 +44,7 @@ public class Round : MonoBehaviour
 
     private void Update()
     {
+        if (!isRunning) return;
         if (elapsedTime >= 1)
         {
             if (!timeOver)
@@ -55,6 +64,7 @@ public class Round : MonoBehaviour
             if (Restaurant.instance.ClientsInRestaurant.Count <= 0)
             {
                 Invoke(nameof(FinishRound), 3f);
+                isRunning = false;
             }
         }
     }

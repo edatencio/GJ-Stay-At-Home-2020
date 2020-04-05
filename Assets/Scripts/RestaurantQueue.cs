@@ -7,20 +7,33 @@ public class RestaurantQueue : MonoBehaviour
 {
     private List<ClientGroup> clientQueue = new List<ClientGroup>();
     public float delayBetweenClient = 5f;
-    public bool canAdd = true;
+    [SerializeField]private bool canAdd = true;
     public int MaxCapacity = 5;
     private void Awake()
     {
         Round.CloseTime += CloseQueue;
+        Round.RoundStart += StartQueue;
+        Round.RoundOver += Clean;
         Restaurant.ClientLeave += OnclientLeave;
     }
     private void OnDestroy()
     {
         Round.CloseTime -= CloseQueue;
-
+        Round.RoundStart -= StartQueue;
+        Round.RoundOver -= Clean;
+        Restaurant.ClientLeave -= OnclientLeave;
     }
-    private void Start()
+    private void Clean()
     {
+        foreach (var item in clientQueue)
+        {
+            Destroy(item);
+        }
+    }
+
+    private void StartQueue()
+    {
+        clientQueue = new List<ClientGroup>();
         canAdd = true;
     }
 
@@ -41,9 +54,8 @@ public class RestaurantQueue : MonoBehaviour
         canAdd = false;
         yield return new WaitForSeconds(delayBetweenClient);
 
-
         canAdd = true;
-        var prefabs = RoundManager.instance.RoundQueue.Peek().clientsPrefabs;
+        var prefabs = RoundManager.instance.CurrentRoundStats.clientsPrefabs;
         var client = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Count)], transform);
         clientQueue.Add(client);
         Restaurant.instance.AddClient(client);
@@ -54,27 +66,26 @@ public class RestaurantQueue : MonoBehaviour
         clientQueue.Remove(client);
     }
 
-
     private void LateUpdate()
     {
         UpdatePos();
 
     }
+    //TODO:Find other way to call it
     private void UpdatePos()
     {
-        if (clientQueue.Count > 0)
-            for (int i = 0; i < clientQueue.Count; i++)
+        for (int i = 0; i < clientQueue.Count; i++)
+        {
+            if (clientQueue[i].isDragging)
             {
-                if (clientQueue[i].isDragging)
-                {
-                    continue;
-                }
-                if (clientQueue[i].IsSitting)
-                {
-                    clientQueue.Remove(clientQueue[i]);
-                    continue;
-                }
-                clientQueue[i].transform.localPosition = clientQueue[i].transform.localPosition.With(z: -1.5f * i);
+                continue;
             }
+            if (clientQueue[i].IsSitting)
+            {
+                clientQueue.Remove(clientQueue[i]);
+                continue;
+            }
+            clientQueue[i].transform.localPosition = clientQueue[i].transform.localPosition.With(z: -1.5f * i);
+        }
     }
 }

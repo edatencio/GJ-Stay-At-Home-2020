@@ -8,7 +8,7 @@ public class ResultPanel : MonoBehaviour
     public TextMeshProUGUI displayMoney;
     private void OnEnable()
     {
-      displaySatisfaction.text = Restaurant.instance?.SatisfactionTotal.ToString();   
+      displaySatisfaction.text = Restaurant.instance?.SatisfactionTotal.ToString("F0") + "%";   
       displayMoney.text = "TODO";   
       displayCostumers.text = Restaurant.instance?.clientCount.ToString("D2");   
     }
