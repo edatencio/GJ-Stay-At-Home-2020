@@ -1,18 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
+
 
 public class Kitchen : Interactable
 {
     [SerializeField] private float cookTime;
-    [SerializeField] private GameObject clock;
+    [SerializeField] private KitchenClock clock;
     [SerializeField] private Transform itemTarget;
 
     protected override Type itemType => typeof(Order);
 
     private void Start()
     {
-        clock.SetActive(false);
+        clock.cookTime = cookTime;
+        clock.gameObject.SetActive(false);
         State = InteractableState.Receive;
     }
 
@@ -42,12 +45,13 @@ public class Kitchen : Interactable
 
     private IEnumerator Cook()
     {
-        clock.SetActive(true);
+        clock.gameObject.SetActive(true);
         State = InteractableState.Idle;
         yield return new WaitForSeconds(cookTime);
         (CurrentItem as Order).IsCooked = true;
-        clock.SetActive(false);
+        clock.gameObject.SetActive(false);
         State = InteractableState.Emit;
     }
 }
+
 
