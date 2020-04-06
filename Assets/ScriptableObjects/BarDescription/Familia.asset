@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Familia
   m_EditorClassIdentifier: 
   info:
-  - title: sadas
-    content: dasasd
-  - title: dsadas
-    content: dsadsa
-  - title: dsadsa
-    content: dsadsasd
+  - title: " \xA1Tu hermana necesita ayuda con tu sobrino!"
+    content: " Criar a un adolescente no es f\xE1cil y aunque puede ser costoso mantenerlo,
+      lo mejor es que viva contigo por un tiempo. Tal vez podr\xEDa ayudarte con
+      el trabajo..."
+  - title: " \xA1Tus primos necesitan ayuda! "
+    content: "Te han llamado para decirte que tus primos est\xE1n llenos de deudas.
+      \xBFQuieres ayudarlos? Ser\xEDa una buena idea ponerlos a trabajar para compensarlo."
+  - title: "\xA1Es momento de un descanso!"
+    content: "Nada mejor que tomar un breve descanso. Deja que tu sobrino Jorge Jos\xE9
+      Torres, \u201CJojoto\u201D, venga a ayudarte en el restaurante."

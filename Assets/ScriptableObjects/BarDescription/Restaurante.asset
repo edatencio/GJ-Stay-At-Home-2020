@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: Restaurante
   m_EditorClassIdentifier: 
   info:
-  - title: dasdsa
-    content: dsa
-  - title: das
-    content: dsa
-  - title: asd
-    content: asdasda
+  - title: "\xA1Tu restaurante est\xE1 creciendo! "
+    content: "\xBFNo te parece que hay muy poco espacio para esperar? Ser\xEDa una
+      buena idea hacer una ampliaci\xF3n, para que m\xE1s personas puedan entrar
+      a la tienda."
+  - title: "\xA1Es hora de una peque\xF1a remodelaci\xF3n! "
+    content: "Ya que el restaurante es todo un \xE9xito, es el momento ideal para
+      hacer una peque\xF1a inversi\xF3n, mejorar la cocina y a\xF1adir una nueva
+      mesa.\r\n"
+  - title: "\xA1Hay demasiada gente!"
+    content: "Do\xF1a arepa es tan famosa, \xBFpor qu\xE9 no a\xF1ades otra cocina
+      y amplias un poco tu restaurante?"
