@@ -72,7 +72,9 @@ public class Kitchen : Interactable
         clock.gameObject.SetActive(true);
         State = InteractableState.Idle;
         yield return new WaitForSeconds(cookTime);
-        (CurrentItem as Order).IsCooked = true;
+        if (CurrentItem != null)
+            (CurrentItem as Order).IsCooked = true;
+            
         clock.gameObject.SetActive(false);
         State = InteractableState.Emit;
     }
