@@ -124,12 +124,8 @@ public class PlayerController : MonoBehaviour
                             {
                                 if (items[i] != null && !(items[i] as Order).IsCooked)
                                 {
-                                    Log.Flag(1);
-
                                     if (destination.TryGetItem<Order>(out IInteractableItem item))
                                     {
-                                        Log.Flag(2);
-
                                         TrySetItem(i);
 
                                         items[i] = item;
