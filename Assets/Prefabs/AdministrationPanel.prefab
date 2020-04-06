@@ -2651,9 +2651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 6892320119818600155}
-  count: 1
+  count: 0
   plusButton: {fileID: 3662595905520524941}
-  descriptions: {fileID: 0}
+  descriptions: {fileID: 11400000, guid: f0eb561dead5cf5449dca8aef34e132f, type: 2}
 --- !u!1 &4110834841241256193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3954,9 +3954,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 5686855872685876242}
-  count: 1
+  count: 0
   plusButton: {fileID: 3112248701595819565}
-  descriptions: {fileID: 0}
+  descriptions: {fileID: 11400000, guid: 04bde12909465b946b759b0c612bdacf, type: 2}
 --- !u!1 &5443654802112475106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5139,7 +5139,7 @@ MonoBehaviour:
   bar: {fileID: 1086320619951367494}
   count: 0
   plusButton: {fileID: 3936179162121251360}
-  descriptions: {fileID: 0}
+  descriptions: {fileID: 11400000, guid: b8b98d082cc56d7488c9496543c25e92, type: 2}
 --- !u!1 &7346373186326430944
 GameObject:
   m_ObjectHideFlags: 0
@@ -6642,9 +6642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 1535826748625691709}
-  count: 3
+  count: 0
   plusButton: {fileID: 3401763081620940094}
-  descriptions: {fileID: 0}
+  descriptions: {fileID: 11400000, guid: 0f4c681ab68a5bc46992d0922f042846, type: 2}
 --- !u!1 &9149538043424341650
 GameObject:
   m_ObjectHideFlags: 0

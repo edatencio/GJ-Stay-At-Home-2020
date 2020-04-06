@@ -10,36 +10,19 @@ public class Client : MonoBehaviour
     {
         switch (myClientGroup.State)
         {
-            case ClientGroupState.Waiting:
-                {
-                    animator.SetTrigger("Idle");
-                }
-                break;
-
-            case ClientGroupState.WaitingMenu:
-                {
-
-                }
-                break;
 
             case ClientGroupState.Order:
                 {
-                    animator.SetTrigger("Finish");
-                }
-                break;
-
-            case ClientGroupState.WaitingOrder:
-                {
-
+                    animator.SetTrigger("Order");
                 }
                 break;
 
             case ClientGroupState.Eating:
-                animator.SetTrigger("Eat");
-
+                animator.SetBool("Eat", true);
                 break;
 
             case ClientGroupState.Finish:
+                animator.SetBool("Eat", false);
                 animator.SetTrigger("Finish");
 
                 break;
