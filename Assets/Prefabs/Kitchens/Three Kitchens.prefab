@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kitchen (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5228316236069803978, guid: a81fce2562542e64db4ee03d50fcc96c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e41623ea7a50b244f88b2dac38d77ec4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81fce2562542e64db4ee03d50fcc96c, type: 3}
 --- !u!1001 &4589406991874491600
@@ -150,6 +155,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Three Kitchens
       objectReference: {fileID: 0}
+    - target: {fileID: 752565550165719241, guid: a81b02341566fb34b8f77610394de583,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 133d3068bbae242469ce7d3fe38e3539, type: 2}
     - target: {fileID: 1767821399438514185, guid: a81b02341566fb34b8f77610394de583,
         type: 3}
       propertyPath: m_LocalPosition.x
