@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < items.Length; i++)
         {
+            //TODO: sometimes get's null exception
             if (items[i] == null)
             {
                 items[i] = item;

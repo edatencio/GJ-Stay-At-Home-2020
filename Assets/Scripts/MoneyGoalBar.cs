@@ -11,6 +11,7 @@ public class MoneyGoalBar : MonoBehaviour
     private void Start()
     {
         Restaurant.OnLeaveTip += UpdateDisplays;
+        Round.RoundStart += OnStartRound;
         fill.fillAmount = 0;
         GoalDisplay.text = "Meta: ";
         currentMoneyDisplay.text = "0$";
@@ -20,6 +21,13 @@ public class MoneyGoalBar : MonoBehaviour
             fill.fillAmount = 0;
         };
     }
+
+    private void OnStartRound()
+    {
+        currentMoneyDisplay.text = "0$";
+        fill.fillAmount = 0;
+    }
+
     private void UpdateDisplays(float tip)
     {
         var current = Restaurant.instance.RoundMoney;
@@ -32,6 +40,6 @@ public class MoneyGoalBar : MonoBehaviour
     private void OnDestroy()
     {
         Restaurant.OnLeaveTip -= UpdateDisplays;
-
+        Round.RoundStart -= OnStartRound;
     }
 }

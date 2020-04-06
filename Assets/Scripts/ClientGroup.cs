@@ -11,8 +11,10 @@ public class ClientGroup : MonoBehaviour
     [SerializeField, BoxGroup("Settings")] private float patienceTime = 15f;
     [SerializeField, BoxGroup("Settings")] private float timeToOrder = 3f;
     [SerializeField, BoxGroup("Settings")] private float eatingTime = 10f;
+    [SerializeField, BoxGroup("Settings")] private float emotionDisplayTime = 20f;
     [Range(0, 1), BoxGroup("Settings")] public float SatisfactionAmount;
     [SerializeField, BoxGroup("References")] private GameObject orderPrefab;
+    [SerializeField, BoxGroup("References")] private SpriteRenderer emotionSprite;
     [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
     [ReorderableList, BoxGroup("References")] public List<Client> clients;
     private Table table;
@@ -22,6 +24,7 @@ public class ClientGroup : MonoBehaviour
     private bool eating;
     private bool ordered;
     private Timer timer = new Timer();
+    private Timer emotionTimer = new Timer();
 
     public enum ClientGroupState { Waiting, WaitingMenu, Menu, Order, WaitingOrder, Eating, Finish }
 
@@ -44,11 +47,14 @@ public class ClientGroup : MonoBehaviour
         patienceTime *= clients.Count;
         eatingTime += (eatingTime * 0.1f) * clients.Count;
         comisionDisplay.gameObject.SetActive(false);
+        emotionSprite.gameObject.SetActive(false);
+        emotionTimer.Start();
+        emotionDisplayTime =UnityEngine.Random.Range(emotionDisplayTime,emotionDisplayTime+6f);
 
     }
-
     private void Update()
     {
+
         switch (State)
         {
             case ClientGroupState.Waiting:
@@ -137,16 +143,80 @@ public class ClientGroup : MonoBehaviour
                 break;
         }
 
+        if (emotionTimer.ElapsedSeconds >= emotionDisplayTime)
+        {
+            StartCoroutine(DisplayEmote());
+            if (eating)
+            {
+                emotionTimer.Stop();
+                return;
+            }
+
+            emotionTimer.Start();
+        }
         if (SatisfactionAmount <= 0)
             LeaveRestaurant();
 
         //textMesh.text = State.ToString();
     }
 
+    private IEnumerator DisplayEmote()
+    {
+        EmotionType type = EmotionType.Happy;
+        emotionSprite.gameObject.SetActive(true);
+        if (SatisfactionAmount >= 1f && SatisfactionAmount >= 0.5f)
+            type = EmotionType.Happy;
+        if (SatisfactionAmount <= 0.5f && SatisfactionAmount >= 0.3f)
+            type = EmotionType.Angry;
+        if (SatisfactionAmount <= 0.3f && SatisfactionAmount >= 0f)
+            type = EmotionType.Worried;
+
+        emotionSprite.sprite = EmotionManager.instance.GetEmotion(type).sprite;
+        yield return new WaitForSeconds(2f);
+        emotionSprite.gameObject.SetActive(false);
+
+    }
+
+    private IEnumerator DisplayEmote(EmotionType type)
+    {
+
+        emotionSprite.gameObject.SetActive(true);
+        var emotion = EmotionManager.instance.GetEmotion(type);
+        emotionSprite.sprite = emotion.sprite;
+        yield return new WaitForSeconds(2f);
+        emotionSprite.gameObject.SetActive(false);
+
+    }
+    private IEnumerator DisplayEmote(ClientGroupState state)
+    {
+
+        var type = EmotionType.Talking;
+        switch (state)
+        {
+            case ClientGroupState.WaitingMenu:
+                type = EmotionType.Waiting;
+                break;
+            case ClientGroupState.Eating:
+                type = EmotionType.Happy;
+                break;
+                case ClientGroupState.Finish:
+                type = EmotionType.Money;
+                break;
+        }
+        var emotion = EmotionManager.instance.GetEmotion(type);
+
+
+        emotionSprite.gameObject.SetActive(true);
+        emotionSprite.sprite = emotion.sprite;
+        yield return new WaitForSeconds(2f);
+        emotionSprite.gameObject.SetActive(false);
+
+    }
     private void ChangeState(ClientGroupState nextState)
     {
         SatisfactionAmount = Mathf.Clamp01(SatisfactionAmount * 1.2f);
         State = nextState;
+        StartCoroutine(DisplayEmote(nextState));
         timer.Stop();
     }
 
@@ -207,22 +277,8 @@ public class ClientGroup : MonoBehaviour
             Destroy(Order.gameObject);
         var tip = (clients.Count * UnityEngine.Random.Range(0.5f, 1f)) / SatisfactionAmount;
         if (SatisfactionAmount <= 0) tip = 0;
-//        DisplayComision(tip);
 
         Restaurant.instance.LeaveRestaurant(this, tip);
     }
 
-    /*private void DisplayComision(float tip)
-    {
-        var canvas = comisionDisplay.GetComponentInParent<Canvas>();
-        if (canvas == null) return;
-        canvas.transform.parent = null;
-        comisionDisplay.gameObject.SetActive(true);
-        if (tip > 0)
-            comisionDisplay.color = Color.green;
-        else
-            comisionDisplay.color = Color.red;
-        comisionDisplay.text = "+" + tip.ToString("F0") + "$";
-
-    }*/
 }
