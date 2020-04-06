@@ -4,10 +4,15 @@ using NaughtyAttributes;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private new Camera camera;
-    [SerializeField] private NavMeshAgent navMesh;
-    [SerializeField] private Animator animator;
-    [SerializeField, ReorderableList] private Transform[] itemsPosition = new Transform[2];
+    [SerializeField, BoxGroup("Mesh")] private Mesh zorayaMesh;
+    [SerializeField, BoxGroup("Mesh")] private Material zorayaMaterial;
+    [SerializeField, BoxGroup("Mesh")] private Mesh jojotoMesh;
+    [SerializeField, BoxGroup("Mesh")] private Material jojotoMaterial;
+    [SerializeField, BoxGroup("Mesh")] private new SkinnedMeshRenderer renderer;
+    [SerializeField, BoxGroup("References")] private new Camera camera;
+    [SerializeField, BoxGroup("References")] private NavMeshAgent navMesh;
+    [SerializeField, BoxGroup("References")] private Animator animator;
+    [SerializeField, BoxGroup("References"), ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
     private IInteractableItem[] items = new IInteractableItem[2];
     private Interactable destination;
@@ -200,6 +205,18 @@ public class PlayerController : MonoBehaviour
             items[index].transform.SetParent(null);
             items[index] = null;
         }
+    }
+
+    public void SetMeshJOJO()
+    {
+        renderer.sharedMesh = jojotoMesh;
+        renderer.material = jojotoMaterial;
+    }
+
+    public void SetMeshZoraya()
+    {
+        renderer.sharedMesh = zorayaMesh;
+        renderer.material = zorayaMaterial;
     }
 }
 
