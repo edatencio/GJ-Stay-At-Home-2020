@@ -325,6 +325,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915727548263221414, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
         type: 3}
       propertyPath: costumers.Array.size
