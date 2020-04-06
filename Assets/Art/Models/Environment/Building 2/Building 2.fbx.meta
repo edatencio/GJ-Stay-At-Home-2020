@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: be49e840a319a57418b16d29747977d2
+guid: bc8bd09325c2df64d9894f12f6b73029
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: anisotropic1
+    second: {fileID: 2100000, guid: ec640facc0eab3a409a7e5afea5df4d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn1
+    second: {fileID: 2100000, guid: dd0a0d22bff703448ba608c7d4a1399b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn4
+    second: {fileID: 2100000, guid: ec640facc0eab3a409a7e5afea5df4d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: columnas
+    second: {fileID: 2100000, guid: ec640facc0eab3a409a7e5afea5df4d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hairTubeShader2
+    second: {fileID: 2100000, guid: 8b5af61b3f621144cae7aed841d3a0df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ladrillos
+    second: {fileID: 2100000, guid: e7409500f1e1ca64aa3bcedd0ef8937e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 2b30f5ef55f0c50469c5f91dbd602073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: cdfa0fc5c86aa3a45aa53929f63a7580, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: ec640facc0eab3a409a7e5afea5df4d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: marco_ventana
+    second: {fileID: 2100000, guid: a0dd3dd6a85a5ab4fbae209acd723024, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ventana2
+    second: {fileID: 2100000, guid: 34bd92ea5a5a10247961d637d32da8fd, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -34,7 +89,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.5
+    globalScale: 17
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -80,7 +135,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 17
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
