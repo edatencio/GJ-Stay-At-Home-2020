@@ -17,7 +17,10 @@ public class AdministrationSystem : MonoBehaviour
 
     private void OpenResultPanel()
     {
-        resultPanel.gameObject.SetActive(true);
+        if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.RoundMoney)
+        {
+            resultPanel.gameObject.SetActive(true);
+        }
     }
     public void OpenAdminPanel()
     {
@@ -32,13 +35,12 @@ public class AdministrationSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         administrationPanel.SetActive(false);
         resultPanel.SetActive(false);
     }
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
 
         Bar.AddedPoint += PointAdded;
         Bar.OnMouseEnter += ShowDescription;

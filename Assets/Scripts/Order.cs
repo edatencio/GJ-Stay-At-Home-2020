@@ -29,13 +29,13 @@ public class Order : MonoBehaviour, IInteractableItem
     {
         if (IsCooked)
         {
-            foodModel.SetActive(true);
-            orderModel.SetActive(false);
+            foodModel?.SetActive(true);
+            orderModel?.SetActive(false);
         }
         else
         {
-            foodModel.SetActive(false);
-            orderModel.SetActive(true);
+            foodModel?.SetActive(false);
+            orderModel?.SetActive(true);
         }
     }
 

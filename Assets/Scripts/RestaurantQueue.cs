@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using System;
 
 public class RestaurantQueue : MonoBehaviour
 {

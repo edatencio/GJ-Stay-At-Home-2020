@@ -2,23 +2,23 @@ using UnityEngine;
 using NaughtyAttributes;
 using TMPro;
 using System.Collections.Generic;
+using System;
+using System.Collections;
 
 public class ClientGroup : MonoBehaviour
 {
     [SerializeField, BoxGroup("Settings")] private float contactRadius = 3f;
-    [SerializeField, BoxGroup("Settings")] private float patienceTime = 60f;
+    [SerializeField, BoxGroup("Settings")] private float patienceTime = 15f;
     [SerializeField, BoxGroup("Settings")] private float timeToOrder = 3f;
     [SerializeField, BoxGroup("Settings")] private float eatingTime = 10f;
     [Range(0, 1), BoxGroup("Settings")] public float SatisfactionAmount;
     [SerializeField, BoxGroup("References")] private GameObject orderPrefab;
     [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
     [ReorderableList, BoxGroup("References")] public List<Client> clients;
-
-    //[SerializeField, BoxGroup("Debug")] private TextMeshPro textMesh;
-
     private Table table;
     private Vector3 orignalPos;
     private Dragger dragger;
+    public TMPro.TextMeshProUGUI comisionDisplay;
     private bool eating;
     private bool ordered;
     private Timer timer = new Timer();
@@ -41,6 +41,10 @@ public class ClientGroup : MonoBehaviour
         orignalPos = transform.position;
         dragger = gameObject.AddComponent<Dragger>();
         SatisfactionAmount = 1;
+        patienceTime *= clients.Count;
+        eatingTime += (eatingTime * 0.1f) * clients.Count;
+        comisionDisplay.gameObject.SetActive(false);
+
     }
 
     private void Update()
@@ -201,7 +205,24 @@ public class ClientGroup : MonoBehaviour
     {
         if (State == ClientGroupState.WaitingOrder)
             Destroy(Order.gameObject);
+        var tip = (clients.Count * UnityEngine.Random.Range(0.5f, 1f)) / SatisfactionAmount;
+        if (SatisfactionAmount <= 0) tip = 0;
+//        DisplayComision(tip);
 
-        Restaurant.instance.LeaveRestaurant(this);
+        Restaurant.instance.LeaveRestaurant(this, tip);
     }
+
+    /*private void DisplayComision(float tip)
+    {
+        var canvas = comisionDisplay.GetComponentInParent<Canvas>();
+        if (canvas == null) return;
+        canvas.transform.parent = null;
+        comisionDisplay.gameObject.SetActive(true);
+        if (tip > 0)
+            comisionDisplay.color = Color.green;
+        else
+            comisionDisplay.color = Color.red;
+        comisionDisplay.text = "+" + tip.ToString("F0") + "$";
+
+    }*/
 }

@@ -9,6 +9,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static event Action<string, string> OnMouseEnter;
     public static event Action OnMouseExit;
     [SerializeField] protected Image bar;
+    [SerializeField] protected Image predictBar;
     [SerializeField, Range(0, 3)] protected int count = 0;
     public int Count => count;
     public Button plusButton;
@@ -21,6 +22,7 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void OnEnable()
     {
+        predictBar.fillAmount = 0;
         if (count > 3)
         {
             plusButton.interactable = false;
@@ -48,11 +50,16 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (count < 3)
+        {
             OnMouseEnter?.Invoke(descriptions.info[count].title, descriptions.info[count].content);
+            predictBar.fillAmount = (count + 1) / 3f;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        predictBar.fillAmount = 0;
+
         OnMouseExit?.Invoke();
     }
 }

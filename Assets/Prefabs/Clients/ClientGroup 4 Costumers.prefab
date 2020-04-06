@@ -112,6 +112,11 @@ PrefabInstance:
       propertyPath: clients.Array.data[0]
       value: 
       objectReference: {fileID: 2863585528361043194}
+    - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: patienceTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8477792763051692664, guid: db762a2c1b272c74eadda2e82af1e9e4,
         type: 3}
       propertyPath: m_LocalPosition.z

@@ -7,6 +7,7 @@ public class RoundStats : ScriptableObject
     [Range(60, 240)] public float roundTime = 120f;
     public List<ClientGroup> clientsPrefabs;
 
+    public float TargetMoney = 30f;
     public float delayBetweenClient = 5f;
 
 }

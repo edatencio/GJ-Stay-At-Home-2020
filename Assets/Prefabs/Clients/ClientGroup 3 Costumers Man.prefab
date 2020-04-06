@@ -360,6 +360,11 @@ PrefabInstance:
       propertyPath: clients.Array.data[0]
       value: 
       objectReference: {fileID: 274914434896122623}
+    - target: {fileID: 2915727548263221415, guid: db762a2c1b272c74eadda2e82af1e9e4,
+        type: 3}
+      propertyPath: patienceTime
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db762a2c1b272c74eadda2e82af1e9e4, type: 3}
 --- !u!4 &5989128664786919973 stripped

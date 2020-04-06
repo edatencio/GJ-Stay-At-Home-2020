@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class RoundStarter : MonoBehaviour
 {
@@ -9,15 +10,30 @@ public class RoundStarter : MonoBehaviour
     public TextMeshProUGUI display;
     private float elapsedTime;
     private bool started;
-
+    Timer timer = new Timer();
     private void Start()
     {
         AdministrationSystem.OnClose += InitTimer;
+        Round.RoundOver += RoundOver;
         InitTimer();
     }
+
+    private void RoundOver()
+    {
+        if (RoundManager.instance.CurrentRoundStats.TargetMoney > Restaurant.instance.RoundMoney)
+        {
+            display.gameObject.SetActive(true);
+            display.text = "Bancarrota :(";
+            timer.Start();
+
+        }
+    }
+
+    private void BackToMainMenu() => UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     private void OnDestroy()
     {
         AdministrationSystem.OnClose -= InitTimer;
+        Round.RoundOver -= RoundOver;
 
     }
     public void InitTimer()
@@ -28,6 +44,10 @@ public class RoundStarter : MonoBehaviour
     }
     private void Update()
     {
+        if (timer.ElapsedSeconds > 2f)
+        {
+            BackToMainMenu();
+        }
         if (!started) return;
 
         if (elapsedTime > 1f)

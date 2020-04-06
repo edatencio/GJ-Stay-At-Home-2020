@@ -33,7 +33,7 @@ public class Table : Interactable
         {
             clientGroup.clients[i].transform.position = seats[i].transform.position;
             clientGroup.clients[i].transform.localRotation = seats[i].transform.rotation;
-            clientGroup.clients[i].animator.SetBool("IsSitting",true);
+            clientGroup.clients[i].animator.SetBool("IsSitting", true);
         }
     }
 
@@ -48,7 +48,8 @@ public class Table : Interactable
 
     protected override void OnItemSet()
     {
-        CurrentItem.transform.position = itemTarget.position;
+        if (CurrentItem != null)
+            CurrentItem.transform.position = itemTarget.position;
         State = InteractableState.Emit;
     }
 

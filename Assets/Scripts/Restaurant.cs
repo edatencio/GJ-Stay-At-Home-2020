@@ -6,8 +6,14 @@ public class Restaurant : MonoBehaviour
 {
     public static Restaurant instance;
     public int MaxCapacity = 5;
-
     public static event Action<ClientGroup> ClientLeave;
+    public static event Action<float> OnLeaveTip;
+    private List<ClientGroup> clientsInRestaurant = new List<ClientGroup>();
+    public List<ClientGroup> ClientsInRestaurant => clientsInRestaurant;
+    public float SatisfactionTotal;
+    public float RoundMoney = 0;
+    public int clientCount;
+
     private void Awake()
     {
         if (instance == null)
@@ -15,23 +21,21 @@ public class Restaurant : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    private List<ClientGroup> clientsInRestaurant = new List<ClientGroup>();
-    public List<ClientGroup> ClientsInRestaurant => clientsInRestaurant;
-    public float SatisfactionTotal;
-    public int clientCount;
-
     public void AddClient(ClientGroup client)
     {
         ClientsInRestaurant.Add(client);
     }
-    public void LeaveRestaurant(ClientGroup client)
+    public void LeaveRestaurant(ClientGroup client, float tip)
     {
         SatisfactionTotal += client.SatisfactionAmount;
+        RoundMoney += tip;
+
         if (client.SatisfactionAmount >= 0)
             clientCount++;
 
         ClientsInRestaurant.Remove(client);
         ClientLeave?.Invoke(client);
+        OnLeaveTip?.Invoke(tip);
         Destroy(client.gameObject);
     }
 }
