@@ -106,21 +106,49 @@ public class PlayerController : MonoBehaviour
 
     private void SetItem()
     {
-        alternateHand = !alternateHand;
-
-        for (int i = 0; i < items.Length; i++)
+        if (destination is Table)
         {
-            i = alternateHand ? items.Length - 1 - i : i;
+            Table table = destination as Table;
 
-            if (items[i] != null && destination.SetItem(items[i]))
+            // if client waiting for menu
+            if (table.clientGroup?.State == ClientGroup.ClientGroupState.WaitingMenu)
             {
-                items[i].transform.SetParent(null);
-                items[i] = null;
+                destination.SetItem(menu);
                 return;
             }
-        }
 
-        destination.SetItem(menu);
+            // If client waiting for cooked order
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] != null && (items[i] as Order).IsCooked && (items[i] as Order) == table.clientGroup?.Order)
+                {
+                    TrySetItem(i);
+                    return;
+                }
+            }
+
+            // TODO recoger el pago de los clientes
+        }
+        else if (destination is Kitchen)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] != null && !(items[i] as Order).IsCooked)
+                {
+                    TrySetItem(i);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void TrySetItem(int index)
+    {
+        if (items[index] != null && destination.SetItem(items[index]))
+        {
+            items[index].transform.SetParent(null);
+            items[index] = null;
+        }
     }
 }
 

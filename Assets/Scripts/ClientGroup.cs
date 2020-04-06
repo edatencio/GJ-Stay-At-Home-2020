@@ -1,7 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
 using NaughtyAttributes;
+using TMPro;
+using System.Collections.Generic;
 
 public class ClientGroup : MonoBehaviour
 {
@@ -14,15 +14,16 @@ public class ClientGroup : MonoBehaviour
     [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
     [ReorderableList, BoxGroup("References")] public List<Client> clients;
 
+    //[SerializeField, BoxGroup("Debug")] private TextMeshPro textMesh;
+
     private Table table;
     private Vector3 orignalPos;
     private Dragger dragger;
     private bool eating;
     private bool ordered;
+    private Timer timer = new Timer();
 
-    private Order order;
-
-    public enum ClientGroupState { Waiting, WaitingMenu, Order, WaitingOrder, Eating, Finish }
+    public enum ClientGroupState { Waiting, WaitingMenu, Menu, Order, WaitingOrder, Eating, Finish }
 
     [ShowNativeProperty]
     public ClientGroupState State { get; set; }
@@ -30,6 +31,8 @@ public class ClientGroup : MonoBehaviour
     public bool IsSitting { get; set; }
 
     public bool isDragging { get; private set; }
+
+    public Order Order { get; private set; }
 
     public GameObject SatisfactionSlider => satisfactionSlider;
 
@@ -55,32 +58,38 @@ public class ClientGroup : MonoBehaviour
 
             case ClientGroupState.WaitingMenu:
                 {
-                    if (!ordered)
-                    {
-                        SatisfactionAmount -= Time.deltaTime / patienceTime;
+                    SatisfactionAmount -= Time.deltaTime / patienceTime;
 
-                        if (table.TryGetItem<Menu>(out IInteractableItem item))
+                    if (table.TryGetItem<Menu>(out IInteractableItem item))
+                    {
+                        if (item is Menu)
                         {
-                            if (item is Menu)
-                            {
-                                table.ClearItem();
-                                StartCoroutine(Ording());
-                            }
-                            else
-                            {
-                                table.SetItem(item);
-                            }
+                            table.ClearItem();
+                            ChangeState(ClientGroupState.Menu);
+                        }
+                        else
+                        {
+                            table.SetItem(item);
                         }
                     }
                 }
                 break;
 
+            case ClientGroupState.Menu:
+                {
+                    if (!timer.isRunning)
+                        timer.Start();
+                    else if (timer.ElapsedSeconds >= timeToOrder)
+                        ChangeState(ClientGroupState.Order);
+                }
+                break;
+
             case ClientGroupState.Order:
                 {
-                    order = Instantiate(orderPrefab).GetComponent<Order>();
-                    order.Setup(clients.Count);
+                    Order = Instantiate(orderPrefab).GetComponent<Order>();
+                    Order.Setup(clients.Count);
 
-                    table.SetItem(order);
+                    table.SetItem(Order);
                     ChangeState(ClientGroupState.WaitingOrder);
                 }
                 break;
@@ -91,7 +100,7 @@ public class ClientGroup : MonoBehaviour
 
                     if (table.TryGetItem<Order>(out IInteractableItem item))
                     {
-                        if ((item as Order) == order && (item as Order).IsCooked)
+                        if ((item as Order) == Order && (item as Order).IsCooked)
                             ChangeState(ClientGroupState.Eating);
                         else
                             table.SetItem(item);
@@ -100,40 +109,41 @@ public class ClientGroup : MonoBehaviour
                 break;
 
             case ClientGroupState.Eating:
-                if (!eating)
-                    StartCoroutine(Eat());
+                {
+                    if (!timer.isRunning)
+                    {
+                        timer.Start();
+                        table.State = Interactable.InteractableState.Idle;
+                    }
+                    else if (timer.ElapsedSeconds >= eatingTime)
+                    {
+                        Destroy(Order.gameObject);
+                        ChangeState(ClientGroupState.Finish);
+                        table.State = Interactable.InteractableState.Receive;
+
+                        // TODO poner platos sucios en la mesa
+                    }
+                }
                 break;
 
             case ClientGroupState.Finish:
-                LeaveRestaurant();
+                {
+                    LeaveRestaurant();
+                }
                 break;
         }
 
         if (SatisfactionAmount <= 0)
             LeaveRestaurant();
-    }
 
-    private IEnumerator Ording()
-    {
-        ordered = true;
-        yield return new WaitForSeconds(timeToOrder);
-        ChangeState(ClientGroupState.Order);
-    }
-
-    private IEnumerator Eat()
-    {
-        eating = true;
-        yield return new WaitForSeconds(eatingTime);
-        Destroy(order.gameObject);
-        ChangeState(ClientGroupState.Finish);
-
-        // TODO poner platos sucios en la mesa
+        //textMesh.text = State.ToString();
     }
 
     private void ChangeState(ClientGroupState nextState)
     {
         SatisfactionAmount = Mathf.Clamp01(SatisfactionAmount * 1.2f);
         State = nextState;
+        timer.Stop();
     }
 
     #region Drag&Drop
@@ -190,13 +200,7 @@ public class ClientGroup : MonoBehaviour
     private void LeaveRestaurant()
     {
         if (State == ClientGroupState.WaitingOrder)
-        {
-            if (table.TryGetItem<Order>(out IInteractableItem item))
-            {
-                if (!(item as Order).IsCooked)
-                    Destroy(item.gameObject);
-            }
-        }
+            Destroy(Order.gameObject);
 
         Restaurant.instance.LeaveRestaurant(this);
     }

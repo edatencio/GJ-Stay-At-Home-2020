@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using UnityEngine.UI;
-
+using TMPro;
 
 public class Kitchen : Interactable
 {
@@ -10,9 +9,11 @@ public class Kitchen : Interactable
     [SerializeField] private float cookTime;
     [SerializeField] private KitchenClock clock;
     [SerializeField] private Transform itemTarget;
-
     [SerializeField] private bool helpThisKitchen;
-    protected override Type itemType => typeof(Order);
+
+    //[SerializeField] private TextMeshPro textMesh;
+
+    public override Type ItemType => typeof(Order);
 
     private void Start()
     {
@@ -27,7 +28,6 @@ public class Kitchen : Interactable
         {
             familyModel.SetActive(true);
             cookTime = 3;
-
         }
         else if (FamilyImprover.familyState == FamilyState.OneKitchen && helpThisKitchen)
         {
@@ -36,12 +36,17 @@ public class Kitchen : Interactable
         }
         else
             familyModel.SetActive(false);
-
     }
+
+    //private void Update()
+    //{
+    //    textMesh.text = State.ToString();
+    //}
+
     // Had to override SetItem to check if order is cooked
     public override bool SetItem(IInteractableItem item)
     {
-        if (State == InteractableState.Receive && SameType(itemType, item.GetType()) && !(item as Order).IsCooked)
+        if (State == InteractableState.Receive && SameType(ItemType, item.GetType()) && !(item as Order).IsCooked)
         {
             CurrentItem = item;
             OnItemSet();
@@ -72,5 +77,4 @@ public class Kitchen : Interactable
         State = InteractableState.Emit;
     }
 }
-
 

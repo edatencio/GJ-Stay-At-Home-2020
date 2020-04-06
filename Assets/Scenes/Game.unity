@@ -321,10 +321,43 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1517420518, guid: e50da029e0ea74c48b3e914729ccb9c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040855839, guid: e50da029e0ea74c48b3e914729ccb9c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1403787261678833529, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1614724250176376144, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847351214290987750, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847351214832215956, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6847351215320246738, guid: e50da029e0ea74c48b3e914729ccb9c7,
         type: 3}
       propertyPath: m_Name
       value: Restaurant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847351215320246738, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6847351215320246748, guid: e50da029e0ea74c48b3e914729ccb9c7,
         type: 3}
@@ -380,6 +413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8746502455589479031, guid: e50da029e0ea74c48b3e914729ccb9c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50da029e0ea74c48b3e914729ccb9c7, type: 3}
@@ -744,6 +782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Kitchen (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857771705443378980, guid: a81fce2562542e64db4ee03d50fcc96c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81fce2562542e64db4ee03d50fcc96c, type: 3}
@@ -2088,7 +2131,6 @@ GameObject:
   - component: {fileID: 1846170080}
   - component: {fileID: 1846170079}
   - component: {fileID: 1846170083}
-  - component: {fileID: 1846170078}
   - component: {fileID: 1846170082}
   m_Layer: 0
   m_Name: Player
@@ -2097,20 +2139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1846170078
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846170077}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1846170079
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2842,6 +2870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Kitchen '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857771705443378980, guid: a81fce2562542e64db4ee03d50fcc96c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81fce2562542e64db4ee03d50fcc96c, type: 3}

@@ -8,12 +8,12 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual IInteractableItem CurrentItem { get; set; }
 
-    abstract protected Type itemType { get; }
+    abstract public Type ItemType { get; }
 
     public enum InteractableState { Idle, Emit, Receive }
 
     [ShowNativeProperty]
-    public InteractableState State { get; protected set; }
+    public InteractableState State { get; set; }
 
     public Transform NavMeshTarget => navMeshTarget;
 
@@ -23,7 +23,7 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual bool SetItem(IInteractableItem item)
     {
-        if (State == InteractableState.Receive && SameType(itemType, item.GetType()))
+        if (State == InteractableState.Receive && SameType(ItemType, item.GetType()))
         {
             CurrentItem = item;
             OnItemSet();
@@ -50,5 +50,10 @@ public abstract class Interactable : MonoBehaviour
     protected bool SameType(Type type1, Type type2)
     {
         return type1.IsAssignableFrom(type2) || type2.IsAssignableFrom(type1) || type1 == type2;
+    }
+
+    public void ClearItem()
+    {
+        CurrentItem = null;
     }
 }

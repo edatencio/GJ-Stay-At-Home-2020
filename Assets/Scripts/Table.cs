@@ -14,7 +14,7 @@ public class Table : Interactable
 
     public bool IsTaken { get; private set; }
 
-    protected override Type itemType => typeof(IInteractableItem);
+    public override Type ItemType => typeof(IInteractableItem);
 
     private void Start()
     {
@@ -51,10 +51,5 @@ public class Table : Interactable
     protected override void OnItemGet()
     {
         State = InteractableState.Receive;
-    }
-
-    public void ClearItem()
-    {
-        CurrentItem = null;
     }
 }
