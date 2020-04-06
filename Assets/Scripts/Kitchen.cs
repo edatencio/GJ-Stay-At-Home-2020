@@ -63,7 +63,8 @@ public class Kitchen : Interactable
 
     protected override void OnItemSet()
     {
-        CurrentItem.transform.position = itemTarget.position;
+        if (CurrentItem != null)
+            CurrentItem.transform.position = itemTarget.position;
         StartCoroutine(Cook());
     }
 
@@ -74,7 +75,7 @@ public class Kitchen : Interactable
         yield return new WaitForSeconds(cookTime);
         if (CurrentItem != null)
             (CurrentItem as Order).IsCooked = true;
-            
+
         clock.gameObject.SetActive(false);
         State = InteractableState.Emit;
     }
