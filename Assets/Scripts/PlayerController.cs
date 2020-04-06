@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
             {
                 items[i] = item;
                 items[i].transform.position = itemsPosition[i].position;
+                items[i].transform.rotation = itemsPosition[i].rotation;
                 items[i].transform.SetParent(itemsPosition[i]);
                 return;
             }

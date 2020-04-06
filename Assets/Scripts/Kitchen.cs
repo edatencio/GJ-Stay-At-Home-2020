@@ -63,9 +63,11 @@ public class Kitchen : Interactable
 
     protected override void OnItemSet()
     {
-        if (CurrentItem.gameObject == null) return;
+        if (CurrentItem.gameObject == null)
+            return;
 
         CurrentItem.transform.position = itemTarget.position;
+        CurrentItem.transform.rotation = Quaternion.Euler(Vector3.zero);
 
         StartCoroutine(Cook());
     }
