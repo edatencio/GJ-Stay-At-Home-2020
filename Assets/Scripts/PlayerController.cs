@@ -153,6 +153,8 @@ public class PlayerController : MonoBehaviour
 
                 if (interactable != null)
                 {
+                    // TODO Queue destinations
+
                     destination = interactable;
                     navMesh.SetDestination(interactable.NavMeshTarget.position);
                     interacted = false;

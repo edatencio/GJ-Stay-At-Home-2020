@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 87049545b269b634188ae42967607e61
+guid: 7f2ebc16467dd784fae090468fdbc9d8
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -1498010087492872569
-    second: Run
+    second: Holding Plates
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: Holding Plates
       takeName: CINEMA_4D_Main
       internalID: 0
       firstFrame: 0
-      lastFrame: 18
+      lastFrame: 140
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -93,11 +93,11 @@ ModelImporter:
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2
         weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_LeftShoulder
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_LeftShoulder/mixamorig_LeftArm
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_LeftShoulder/mixamorig_LeftArm/mixamorig_LeftForeArm
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_LeftShoulder/mixamorig_LeftArm/mixamorig_LeftForeArm/mixamorig_LeftHand
         weight: 0
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_LeftShoulder/mixamorig_LeftArm/mixamorig_LeftForeArm/mixamorig_LeftHand/mixamorig_LeftHandIndex1
@@ -123,11 +123,11 @@ ModelImporter:
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_Neck/mixamorig_Head/mixamorig_HeadTop_End
         weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_RightShoulder
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_RightShoulder/mixamorig_RightArm
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_RightShoulder/mixamorig_RightArm/mixamorig_RightForeArm
-        weight: 0
+        weight: 1
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_RightShoulder/mixamorig_RightArm/mixamorig_RightForeArm/mixamorig_RightHand
         weight: 0
       - path: mixamorig_Hips/mixamorig_Spine/mixamorig_Spine1/mixamorig_Spine2/mixamorig_RightShoulder/mixamorig_RightArm/mixamorig_RightForeArm/mixamorig_RightHand/mixamorig_RightHandIndex1
@@ -168,7 +168,7 @@ ModelImporter:
     weldVertices: 1
     preserveHierarchy: 0
     skinWeightsMode: 0
-    maxBonesPerVertex: 4
+    maxBonesPerVertex: 223
     minBoneWeight: 0.001
     meshOptimizationFlags: -1
     indexFormat: 0
@@ -190,7 +190,27 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Zoraya(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: CINEMA_4D_Editor
+      parentName: Zoraya(Clone)
+      position: {x: -12.2883215, y: 2.2506905, z: 8.222771}
+      rotation: {x: 0.018135266, y: 0.9556575, z: -0.0097523965, w: -0.2937598}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Disc
+      parentName: Zoraya(Clone)
+      position: {x: -1.5072643, y: 2.1455202, z: -0.019917907}
+      rotation: {x: 0.9983993, y: 0.036003083, z: -0.0015719285, w: 0.043591056}
+      scale: {x: 1, y: 1, z: 1}
+    - name: characterMedium
+      parentName: Zoraya(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -199,9 +219,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: mixamorig_Hips
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
