@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: a52cd36ed2ba6dd40923f3ac7c8cad75
+guid: c7eff64973ef5da4a9c79a7cfc4b0fcb
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 57d905a325ece10429d098ff12c5f9c3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -15,7 +20,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tCannot find root motion transform 'characterMedium'.\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -81,7 +87,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: characterMedium
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

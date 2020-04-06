@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -1498010087492872569
-    second: CINEMA_4D_Main
+    second: Eating
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: CINEMA_4D_Main
+      name: Eating
       takeName: CINEMA_4D_Main
       internalID: 0
       firstFrame: 0
