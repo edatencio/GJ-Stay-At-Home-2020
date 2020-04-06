@@ -27,6 +27,7 @@ public class Round : MonoBehaviour
         level++;
         isRunning = true;
         RoundStart?.Invoke();
+        
     }
     private void Update()
     {

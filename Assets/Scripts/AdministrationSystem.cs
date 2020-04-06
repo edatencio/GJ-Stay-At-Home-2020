@@ -10,22 +10,26 @@ public class AdministrationSystem : MonoBehaviour
     public GameObject administrationPanel;
     public TextMeshProUGUI titleDisplay;
     public TextMeshProUGUI descriptionDisplay;
+    public TextMeshProUGUI walletDisplay;
     public Bar familyBar;
     public Bar impuestoBar;
     public Bar gotaGotaBar;
     public Bar restaurantBar;
 
+    private bool once = false;
     private void OpenResultPanel()
     {
-        if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.RoundMoney)
+        if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.Wallet)
         {
             resultPanel.gameObject.SetActive(true);
+            walletDisplay.text = Restaurant.instance.Wallet.ToString("F0");
         }
     }
     public void OpenAdminPanel()
     {
         resultPanel.SetActive(false);
         administrationPanel.SetActive(true);
+        once = false;
     }
     private void Awake()
     {
@@ -52,12 +56,17 @@ public class AdministrationSystem : MonoBehaviour
     {
         titleDisplay.text = "Toma una decision";
         descriptionDisplay.text = "";
+        walletDisplay.text = Restaurant.instance.Wallet.ToString("F0") + "$";
+
     }
 
     private void ShowDescription(string title, string description)
     {
         titleDisplay.text = title;
         descriptionDisplay.text = description;
+        if (once) return;
+        walletDisplay.text = 0 + "$";
+
     }
 
     private void OnDestroy()
@@ -73,6 +82,9 @@ public class AdministrationSystem : MonoBehaviour
         impuestoBar.plusButton.interactable = false;
         gotaGotaBar.plusButton.interactable = false;
         restaurantBar.plusButton.interactable = false;
+        once = true;
+        Restaurant.instance.Wallet = 0;
+        walletDisplay.text = "0$";
     }
     public void ClosePanel()
     {

@@ -5,6 +5,7 @@ using System;
 public class RoundManager : MonoBehaviour
 {
     public static RoundManager instance;
+    [SerializeField] private RoundStats DefaultRound;
     [SerializeField] private List<RoundStats> rounds;
     private Queue<RoundStats> roundQueue = new Queue<RoundStats>();
     public Queue<RoundStats> RoundQueue => roundQueue;
@@ -38,8 +39,7 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
-            NoMoreRounds.Invoke();
-            return null;
+            return DefaultRound;
         }
     }
 

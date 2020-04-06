@@ -93,7 +93,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 200
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683489840ef45174a99986ffe4f7f19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DefaultRound: {fileID: 11400000, guid: d61ffd1a0557aaa428da3812aec8096d, type: 2}
   rounds:
   - {fileID: 11400000, guid: 762ff1a8cf69cca43bf404bd5a221f51, type: 2}
   - {fileID: 11400000, guid: 9d6ec06df74865a47b757b084f391ef6, type: 2}
@@ -1033,6 +1034,7 @@ MonoBehaviour:
   MaxCapacity: 5
   SatisfactionTotal: 0
   RoundMoney: 0
+  Wallet: 0
   clientCount: 0
 --- !u!1 &7807089653257642594
 GameObject:
