@@ -22,7 +22,7 @@ public class AdministrationSystem : MonoBehaviour
         if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.Wallet)
         {
             resultPanel.gameObject.SetActive(true);
-            walletDisplay.text = Restaurant.instance.Wallet.ToString();
+            walletDisplay.text = Restaurant.instance.Wallet.ToString("F0");
         }
     }
     public void OpenAdminPanel()
@@ -56,7 +56,7 @@ public class AdministrationSystem : MonoBehaviour
     {
         titleDisplay.text = "Toma una decision";
         descriptionDisplay.text = "";
-        walletDisplay.text = Restaurant.instance.Wallet.ToString();
+        walletDisplay.text = Restaurant.instance.Wallet.ToString("F0") + "$";
 
     }
 
