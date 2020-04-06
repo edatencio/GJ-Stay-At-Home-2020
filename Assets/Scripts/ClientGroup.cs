@@ -49,12 +49,11 @@ public class ClientGroup : MonoBehaviour
         comisionDisplay.gameObject.SetActive(false);
         emotionSprite.gameObject.SetActive(false);
         emotionTimer.Start();
-        emotionDisplayTime =UnityEngine.Random.Range(emotionDisplayTime,emotionDisplayTime+6f);
-
+        emotionDisplayTime = UnityEngine.Random.Range(emotionDisplayTime, emotionDisplayTime + 6f);
     }
+
     private void Update()
     {
-
         switch (State)
         {
             case ClientGroupState.Waiting:
@@ -96,8 +95,9 @@ public class ClientGroup : MonoBehaviour
 
             case ClientGroupState.Order:
                 {
-                    Order = Instantiate(orderPrefab).GetComponent<Order>();
+                    Order = Instantiate(orderPrefab, Vector3.zero, Quaternion.Euler(Vector3.zero)).GetComponent<Order>();
                     Order.Setup(clients.Count);
+                    Order.transform.rotation = Quaternion.identity;
 
                     table.SetItem(Order);
                     ChangeState(ClientGroupState.WaitingOrder);
@@ -174,44 +174,42 @@ public class ClientGroup : MonoBehaviour
         emotionSprite.sprite = EmotionManager.instance.GetEmotion(type).sprite;
         yield return new WaitForSeconds(2f);
         emotionSprite.gameObject.SetActive(false);
-
     }
 
     private IEnumerator DisplayEmote(EmotionType type)
     {
-
         emotionSprite.gameObject.SetActive(true);
         var emotion = EmotionManager.instance.GetEmotion(type);
         emotionSprite.sprite = emotion.sprite;
         yield return new WaitForSeconds(2f);
         emotionSprite.gameObject.SetActive(false);
-
     }
+
     private IEnumerator DisplayEmote(ClientGroupState state)
     {
-
         var type = EmotionType.Talking;
         switch (state)
         {
             case ClientGroupState.WaitingMenu:
                 type = EmotionType.Waiting;
                 break;
+
             case ClientGroupState.Eating:
                 type = EmotionType.Happy;
                 break;
-                case ClientGroupState.Finish:
+
+            case ClientGroupState.Finish:
                 type = EmotionType.Money;
                 break;
         }
         var emotion = EmotionManager.instance.GetEmotion(type);
 
-
         emotionSprite.gameObject.SetActive(true);
         emotionSprite.sprite = emotion.sprite;
         yield return new WaitForSeconds(2f);
         emotionSprite.gameObject.SetActive(false);
-
     }
+
     private void ChangeState(ClientGroupState nextState)
     {
         SatisfactionAmount = Mathf.Clamp01(SatisfactionAmount * 1.2f);
@@ -280,5 +278,4 @@ public class ClientGroup : MonoBehaviour
 
         Restaurant.instance.LeaveRestaurant(this, tip);
     }
-
 }

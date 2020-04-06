@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Two Kitchens
       objectReference: {fileID: 0}
+    - target: {fileID: 752565550165719241, guid: a81b02341566fb34b8f77610394de583,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 133d3068bbae242469ce7d3fe38e3539, type: 2}
     - target: {fileID: 1767821399438514185, guid: a81b02341566fb34b8f77610394de583,
         type: 3}
       propertyPath: m_LocalPosition.x

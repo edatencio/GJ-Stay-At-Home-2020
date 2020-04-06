@@ -49,8 +49,11 @@ public class Table : Interactable
     protected override void OnItemSet()
     {
         if (CurrentItem != null)
+        {
             CurrentItem.transform.position = itemTarget.position;
-        State = InteractableState.Emit;
+            CurrentItem.transform.rotation = Quaternion.Euler(Vector3.zero);
+            State = InteractableState.Emit;
+        }
     }
 
     protected override void OnItemGet()
