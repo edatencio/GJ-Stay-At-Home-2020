@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe980ed8046b941ac8a6e11fc62880, type: 3}
   m_Name: Restaurante
   m_EditorClassIdentifier: 
-  title: Renovar
-  description: Comprar mas mesas y decorar el restaurante
+  info:
+  - title: dasdsa
+    content: dsa
+  - title: das
+    content: dsa
+  - title: asd
+    content: asdasda

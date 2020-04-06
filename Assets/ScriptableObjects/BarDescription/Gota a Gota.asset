@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe980ed8046b941ac8a6e11fc62880, type: 3}
   m_Name: Gota a Gota
   m_EditorClassIdentifier: 
-  title: Pagale al gota a gota
-  description: cosas malas pueden pasar si nohaces nada
+  info:
+  - title: sadas
+    content: dsad
+  - title: dasda
+    content: asadad
+  - title: dsada
+    content: dasd

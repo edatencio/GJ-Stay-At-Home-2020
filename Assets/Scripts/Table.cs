@@ -30,7 +30,11 @@ public class Table : Interactable
         clientGroup.SatisfactionSlider.transform.position = satisfactionSliderTarget.position;
 
         for (int i = 0; i < clientGroup.clients.Count; i++)
+        {
             clientGroup.clients[i].transform.position = seats[i].transform.position;
+            clientGroup.clients[i].transform.localRotation = seats[i].transform.rotation;
+            clientGroup.clients[i].animator.SetBool("IsSitting",true);
+        }
     }
 
     private void OnClientLeave(ClientGroup client)

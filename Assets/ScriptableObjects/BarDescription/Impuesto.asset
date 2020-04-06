@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe980ed8046b941ac8a6e11fc62880, type: 3}
   m_Name: Impuesto
   m_EditorClassIdentifier: 
-  title: Paga los impuestos
-  description: La DIAN como siempre
+  info:
+  - title: dasdas
+    content: dasdas
+  - title: dsadas
+    content: dasdasd
+  - title: dasda
+    content: dasdsa

@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe980ed8046b941ac8a6e11fc62880, type: 3}
   m_Name: Familia
   m_EditorClassIdentifier: 
-  title: Rescata a tu familia
-  description: dale a tus 9 hijos para comer hoy
+  info:
+  - title: sadas
+    content: dasasd
+  - title: dsadas
+    content: dsadsa
+  - title: dsadsa
+    content: dsadsasd
