@@ -4024,6 +4024,7 @@ MonoBehaviour:
   administrationPanel: {fileID: 909406812319440515}
   titleDisplay: {fileID: 3167052312703793475}
   descriptionDisplay: {fileID: 3491843636053143964}
+  walletDisplay: {fileID: 6784796487058020421}
   familyBar: {fileID: 5325754517413515169}
   impuestoBar: {fileID: 8147203952021198608}
   gotaGotaBar: {fileID: 8564824730848132583}
