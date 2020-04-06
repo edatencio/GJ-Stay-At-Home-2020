@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5052161327873470721}
   m_Layer: 0
-  m_Name: Tables
+  m_Name: three tables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 5203489917109099913, guid: eba1400bf522f1b48a3a2d7c27cd7bff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5203489917109099913, guid: eba1400bf522f1b48a3a2d7c27cd7bff,
         type: 3}
@@ -128,7 +128,7 @@ PrefabInstance:
     - target: {fileID: 7701784481606991908, guid: 0a20110e7ebf07b48aceddc9d4f54236,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7701784481606991908, guid: 0a20110e7ebf07b48aceddc9d4f54236,
         type: 3}
@@ -203,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 6772531875882413456, guid: 5b8d289fd0e383843b684dd84b1e5a35,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 6772531875882413456, guid: 5b8d289fd0e383843b684dd84b1e5a35,
         type: 3}
