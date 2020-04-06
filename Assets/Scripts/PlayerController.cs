@@ -29,21 +29,7 @@ public class PlayerController : MonoBehaviour
 
             if (Vector3.Distance(targetPosition, transform.position) < 0.2f)
             {
-                if (!interacted)
-                {
-                    interacted = true;
-
-                    switch (destination.State)
-                    {
-                        case Interactable.InteractableState.Emit:
-                            GetItem();
-                            break;
-
-                        case Interactable.InteractableState.Receive:
-                            SetItem();
-                            break;
-                    }
-                }
+                Interact();
 
                 Vector3 direction = (destination.transform.position.With(y: transform.position.y) - transform.position);
 
@@ -56,6 +42,109 @@ public class PlayerController : MonoBehaviour
         // Animations
         animator.SetFloat(Constants.Player.Animations.Velocity, navMesh.velocity.magnitude);
         animator.SetFloat(Constants.Player.Animations.RandomValue, Random.value);
+    }
+
+    private void Interact()
+    {
+        if (!interacted)
+        {
+            interacted = true;
+
+            if (destination is Table)
+            {
+                switch (destination.State)
+                {
+                    case Interactable.InteractableState.Emit:
+                        GetItem();
+                        break;
+
+                    case Interactable.InteractableState.Receive:
+                        {
+                            Table table = destination as Table;
+
+                            // if client waiting for menu
+                            if (table.clientGroup?.State == ClientGroup.ClientGroupState.WaitingMenu)
+                            {
+                                destination.SetItem(menu);
+                                return;
+                            }
+
+                            // If client waiting for cooked order
+                            for (int i = 0; i < items.Length; i++)
+                            {
+                                if (items[i] != null && (items[i] as Order).IsCooked && (items[i] as Order) == table.clientGroup?.Order)
+                                {
+                                    TrySetItem(i);
+                                    return;
+                                }
+                            }
+
+                            // TODO recoger el pago de los clientes
+                        }
+                        break;
+                }
+            }
+            else if (destination is Kitchen)
+            {
+                switch (destination.State)
+                {
+                    // If kitchen is busy, do nothing
+                    case Interactable.InteractableState.Idle:
+                        return;
+
+                    // if kitchen is receiving, give order
+                    case Interactable.InteractableState.Receive:
+                        {
+                            for (int i = 0; i < items.Length; i++)
+                            {
+                                if (items[i] != null && !(items[i] as Order).IsCooked)
+                                {
+                                    TrySetItem(i);
+                                    return;
+                                }
+                            }
+                        }
+                        break;
+
+                    case Interactable.InteractableState.Emit:
+                        {
+                            // if kitchen is emitting and there is an empty hand, get order
+                            for (int i = 0; i < items.Length; i++)
+                            {
+                                if (items[i] == null)
+                                {
+                                    GetItem();
+                                    return;
+                                }
+                            }
+
+                            // if kitchen is emitting, and both hands are full, but there is an
+                            // uncooked order in one of them, swap orders
+                            for (int i = 0; i < items.Length; i++)
+                            {
+                                if (items[i] != null && !(items[i] as Order).IsCooked)
+                                {
+                                    Log.Flag(1);
+
+                                    if (destination.TryGetItem<Order>(out IInteractableItem item))
+                                    {
+                                        Log.Flag(2);
+
+                                        TrySetItem(i);
+
+                                        items[i] = item;
+                                        items[i].transform.position = itemsPosition[i].position;
+                                        items[i].transform.SetParent(itemsPosition[i]);
+                                    }
+
+                                    return;
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -100,44 +189,6 @@ public class PlayerController : MonoBehaviour
                 items[i].transform.position = itemsPosition[i].position;
                 items[i].transform.SetParent(itemsPosition[i]);
                 return;
-            }
-        }
-    }
-
-    private void SetItem()
-    {
-        if (destination is Table)
-        {
-            Table table = destination as Table;
-
-            // if client waiting for menu
-            if (table.clientGroup?.State == ClientGroup.ClientGroupState.WaitingMenu)
-            {
-                destination.SetItem(menu);
-                return;
-            }
-
-            // If client waiting for cooked order
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (items[i] != null && (items[i] as Order).IsCooked && (items[i] as Order) == table.clientGroup?.Order)
-                {
-                    TrySetItem(i);
-                    return;
-                }
-            }
-
-            // TODO recoger el pago de los clientes
-        }
-        else if (destination is Kitchen)
-        {
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (items[i] != null && !(items[i] as Order).IsCooked)
-                {
-                    TrySetItem(i);
-                    return;
-                }
             }
         }
     }
