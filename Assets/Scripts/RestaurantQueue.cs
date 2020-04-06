@@ -7,6 +7,7 @@ public class RestaurantQueue : MonoBehaviour
 {
     private List<ClientGroup> clientQueue = new List<ClientGroup>();
     public float delayBetweenClient = 5f;
+    public float spaceBtwClients = 2f;
     [SerializeField] private bool canAdd = true;
     private void Awake()
     {
@@ -85,7 +86,7 @@ public class RestaurantQueue : MonoBehaviour
                 clientQueue.Remove(clientQueue[i]);
                 continue;
             }
-            clientQueue[i].transform.localPosition = clientQueue[i].transform.localPosition.With(z: -1.5f * i);
+            clientQueue[i].transform.localPosition = clientQueue[i].transform.localPosition.With(z: -spaceBtwClients * i);
         }
     }
 }

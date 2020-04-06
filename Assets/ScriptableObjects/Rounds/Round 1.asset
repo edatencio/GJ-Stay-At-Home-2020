@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 4924673611367719424, guid: 20857d08c1659dc4695f72ac23479afb, type: 3}
   - {fileID: 5989128664786919974, guid: 10a0ddab92d2ab445bb6df484025b0d4, type: 3}
   - {fileID: 4924673611367719424, guid: 20857d08c1659dc4695f72ac23479afb, type: 3}
+  delayBetweenClient: 9

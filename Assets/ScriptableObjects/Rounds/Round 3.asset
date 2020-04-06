@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd17fcbcba9311641a0eff5189599aa9, type: 3}
-  m_Name: Round 2
+  m_Name: Round 3
   m_EditorClassIdentifier: 
   roundTime: 120
   clientsPrefabs:
@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 5989128664786919974, guid: 10a0ddab92d2ab445bb6df484025b0d4, type: 3}
   - {fileID: 4924673611367719424, guid: 20857d08c1659dc4695f72ac23479afb, type: 3}
   - {fileID: 5989128664786919974, guid: 10a0ddab92d2ab445bb6df484025b0d4, type: 3}
-  delayBetweenClient: 8
+  delayBetweenClient: 7

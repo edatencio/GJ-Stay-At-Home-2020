@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBetweenClient: 5
+  spaceBtwClients: 2
   canAdd: 0
 --- !u!1 &6847351214832215956
 GameObject:
@@ -665,7 +666,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6847351215320246748}
   - component: {fileID: 6847351215320246739}
-  - component: {fileID: 780579837}
   m_Layer: 0
   m_Name: Restaurant
   m_TagString: Untagged
@@ -709,26 +709,6 @@ MonoBehaviour:
   MaxCapacity: 5
   SatisfactionTotal: 0
   clientCount: 0
---- !u!114 &780579837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6847351215320246738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0baf7b0af9c559543bb1f9e994dd3192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kitchens:
-  - {fileID: 5755985195282957757}
-  - {fileID: 672681384814629368}
-  - {fileID: 4168380192113417947}
-  tables:
-  - {fileID: 5052161327600379986}
-  - {fileID: 7109049962156791587}
-  - {fileID: 7784761337122938773}
 --- !u!1 &8541433946884804582
 GameObject:
   m_ObjectHideFlags: 0
