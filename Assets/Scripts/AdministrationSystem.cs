@@ -19,10 +19,10 @@ public class AdministrationSystem : MonoBehaviour
     private bool once = false;
     private void OpenResultPanel()
     {
-        if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.RoundMoney)
+        if (RoundManager.instance.CurrentRoundStats.TargetMoney < Restaurant.instance.Wallet)
         {
             resultPanel.gameObject.SetActive(true);
-            walletDisplay.text = Restaurant.instance.RoundMoney.ToString();
+            walletDisplay.text = Restaurant.instance.Wallet.ToString();
         }
     }
     public void OpenAdminPanel()
@@ -56,7 +56,7 @@ public class AdministrationSystem : MonoBehaviour
     {
         titleDisplay.text = "Toma una decision";
         descriptionDisplay.text = "";
-        walletDisplay.text = Restaurant.instance.RoundMoney.ToString();
+        walletDisplay.text = Restaurant.instance.Wallet.ToString();
 
     }
 
@@ -83,6 +83,7 @@ public class AdministrationSystem : MonoBehaviour
         gotaGotaBar.plusButton.interactable = false;
         restaurantBar.plusButton.interactable = false;
         once = true;
+        Restaurant.instance.Wallet = 0;
         walletDisplay.text = "0$";
     }
     public void ClosePanel()

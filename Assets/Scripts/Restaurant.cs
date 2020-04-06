@@ -12,6 +12,7 @@ public class Restaurant : MonoBehaviour
     public List<ClientGroup> ClientsInRestaurant => clientsInRestaurant;
     public float SatisfactionTotal;
     public float RoundMoney = 0;
+    public float Wallet = 0;
     public int clientCount;
 
     private void Awake()
@@ -21,6 +22,21 @@ public class Restaurant : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    private void Start()
+    {
+        Round.RoundStart += StartRound;
+    }
+
+    private void OnDestroy()
+    {
+        Round.RoundStart -= StartRound;
+
+    }
+    private void StartRound()
+    {
+        RoundMoney = 0;
+    }
+
     public void AddClient(ClientGroup client)
     {
         ClientsInRestaurant.Add(client);
@@ -33,6 +49,7 @@ public class Restaurant : MonoBehaviour
         if (client.SatisfactionAmount >= 0)
             clientCount++;
 
+        Wallet = RoundMoney;
         ClientsInRestaurant.Remove(client);
         ClientLeave?.Invoke(client);
         OnLeaveTip?.Invoke(tip);
