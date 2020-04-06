@@ -36,6 +36,8 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Debug.Log(bar.fillAmount);
             AddedPoint?.Invoke();
         }
+        else
+            plusButton.interactable = false;
     }
     public void Reduce()
     {
@@ -45,7 +47,8 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnMouseEnter?.Invoke(descriptions.info[count].title, descriptions.info[count].content);
+        if (count < 3)
+            OnMouseEnter?.Invoke(descriptions.info[count].title, descriptions.info[count].content);
     }
 
     public void OnPointerExit(PointerEventData eventData)
