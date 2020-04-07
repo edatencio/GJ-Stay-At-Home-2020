@@ -246,12 +246,23 @@ public class ClientGroup : MonoBehaviour
             {
                 table = collider.GetComponent<Table>();
 
+
                 if (table != null && !table.IsTaken && table.SeatCount >= clients.Count)
                 {
-                    IsSitting = true;
-                    this.table = table;
-                    table.SetClientGroup(this);
-                    GetComponent<Collider>().enabled = false;
+                    var dirtyPlates = table.TryGetItem<PlatesDirty>(out IInteractableItem item);
+                    if (dirtyPlates)
+                    {
+                        table.SetItem(item);
+                        transform.position = orignalPos;
+                    }
+                    else
+                    {
+                        IsSitting = true;
+                        this.table = table;
+                        table.SetClientGroup(this);
+                        GetComponent<Collider>().enabled = false;
+
+                    }
 
                     return;
                 }

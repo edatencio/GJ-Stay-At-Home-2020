@@ -13,7 +13,11 @@ public class RandomEventManager : MonoBehaviour
     {
         Round.RoundOver += Play;
     }
+    private void Start()
+    {
+        randomEventPanel.SetActive(false);
 
+    }
     private void OnDestroy()
     {
         Round.RoundOver -= Play;

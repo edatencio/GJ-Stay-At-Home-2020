@@ -5300,7 +5300,7 @@ PrefabInstance:
     - target: {fileID: 6065699149267226605, guid: 93909ea448453ad4486f4328f935d10c,
         type: 3}
       propertyPath: randomEvents.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6065699149267226605, guid: 93909ea448453ad4486f4328f935d10c,
         type: 3}
@@ -5313,6 +5313,12 @@ PrefabInstance:
       propertyPath: randomEvents.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: cae8094a45fe8e24c8a65b5088c1316f,
+        type: 2}
+    - target: {fileID: 6065699149267226605, guid: 93909ea448453ad4486f4328f935d10c,
+        type: 3}
+      propertyPath: randomEvents.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: acf5514ea3daae04ca4735898ac92918,
         type: 2}
     - target: {fileID: 8057936406074937650, guid: 93909ea448453ad4486f4328f935d10c,
         type: 3}
