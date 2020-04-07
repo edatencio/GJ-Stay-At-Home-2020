@@ -256,5 +256,10 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    public void SetPositionInGame(Transform targetPos)
+    {
+        navMesh.SetDestination(targetPos.position);
+        
+    }
 }
 

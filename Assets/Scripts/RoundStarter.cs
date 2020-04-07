@@ -5,17 +5,28 @@ using System;
 public class RoundStarter : MonoBehaviour
 {
     [SerializeField] private Round round;
+    [SerializeField] private Transform cameraTranform;
+    [SerializeField] private Transform targetcameraTranform;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private Transform targetPlayerPos;
     public float delayBtwRounds;
 
     public TextMeshProUGUI display;
     private float elapsedTime;
     private bool started;
     Timer timer = new Timer();
-    public void StartRound()
+    public void Start()
     {
         AdministrationSystem.OnClose += InitTimer;
         Round.RoundOver += RoundOver;
+        display.gameObject.SetActive(false);
+    }
+    public void StartRound()
+    {
         InitTimer();
+        cameraTranform.position = targetcameraTranform.position;
+        cameraTranform.rotation = targetcameraTranform.rotation;
+        player.SetPositionInGame(targetPlayerPos);
     }
 
     private void RoundOver()
@@ -41,6 +52,8 @@ public class RoundStarter : MonoBehaviour
         started = true;
         display.gameObject.SetActive(true);
         elapsedTime = delayBtwRounds;
+        display.gameObject.SetActive(true);
+
     }
     private void Update()
     {
