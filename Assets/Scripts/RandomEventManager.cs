@@ -22,7 +22,7 @@ public class RandomEventManager : MonoBehaviour
     private void Play()
     {
         if (RoundManager.instance.CurrentRoundStats.TargetMoney <= Restaurant.instance.RoundMoney)
-            if (UnityEngine.Random.value > 0.3f)
+            if (UnityEngine.Random.value < 0.3f)
             {
                 var rndEvent = bars[Random.Range(0, bars.Count - 1)].RandomEvent();
                 if (rndEvent == null) return;
