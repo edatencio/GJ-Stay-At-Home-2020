@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, BoxGroup("References")] private new Camera camera;
     [SerializeField, BoxGroup("References")] private NavMeshAgent navMesh;
     [SerializeField, BoxGroup("References")] private Animator animator;
+    [SerializeField, BoxGroup("References")] private ParticleSystem runParticles;
     [SerializeField, BoxGroup("References"), ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
     private IInteractableItem[] items = new IInteractableItem[2];
@@ -47,6 +48,18 @@ public class PlayerController : MonoBehaviour
         // Animations
         animator.SetFloat(Constants.Player.Animations.Velocity, navMesh.velocity.magnitude);
         animator.SetFloat(Constants.Player.Animations.RandomValue, Random.value);
+
+        // Particle Systems
+        if (navMesh.velocity.magnitude > 0.2f)
+        {
+            if (runParticles.isStopped)
+                runParticles.Play();
+        }
+        else
+        {
+            if (runParticles.isPlaying)
+                runParticles.Stop();
+        }
     }
 
     private void Interact()
@@ -245,6 +258,7 @@ public class PlayerController : MonoBehaviour
                 navMesh.acceleration = 30;
                 navMesh.speed = 5f;
                 break;
+
             case 1:
                 navMesh.acceleration = 50;
                 navMesh.speed = 7f;
