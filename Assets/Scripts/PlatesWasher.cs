@@ -3,6 +3,8 @@ using System;
 
 public class PlatesWasher : Interactable
 {
+    [SerializeField] private AudioSource platesAudio;
+
     public override Type ItemType => typeof(PlatesDirty);
 
     private void Start()
@@ -20,6 +22,7 @@ public class PlatesWasher : Interactable
 
     protected override void OnItemSet()
     {
+        platesAudio.Play();
         Destroy(CurrentItem.gameObject);
     }
 }
