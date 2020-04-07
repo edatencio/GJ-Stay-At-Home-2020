@@ -354,6 +354,8 @@ MonoBehaviour:
   SatisfactionAmount: 1
   orderPrefab: {fileID: 8838601278504271183, guid: dc987d35823fb4345a5c03916c7e44b1,
     type: 3}
+  dirtyPlatesPrefab: {fileID: 2022305856152961078, guid: 5362312b111c593439c7aac8c825aa6f,
+    type: 3}
   emotionSprite: {fileID: 4890342070676917623}
   satisfactionSlider: {fileID: 1788172148899810913}
   clients:
