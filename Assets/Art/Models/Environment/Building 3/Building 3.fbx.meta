@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: 9e3f6d9918c680840895bb89898f408c
+guid: 29f3090c99e2c8c4b8641b890af8a2eb
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LADRILLO
+    second: {fileID: 2100000, guid: ed0095b70dccfb6418c221ae0acd4476, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LAMPARAAMARILLA
+    second: {fileID: 2100000, guid: 726d4d8524cfd214ab3c2de5f15bede7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MARCOVENTANA
+    second: {fileID: 2100000, guid: 2ee91b922d7a764468edea1e34330f2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDAMARILLA
+    second: {fileID: 2100000, guid: f30feb5b6dafde84696df64929804091, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDINF
+    second: {fileID: 2100000, guid: 61d6c26befcbb0746bbb45a24b623d4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROJOLAMPARA
+    second: {fileID: 2100000, guid: 0ffaa77b829e5b44781e941d1d96c4f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TECHO
+    second: {fileID: 2100000, guid: 25b74ba2dff91c444bcf969575f326ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TECHO_INT
+    second: {fileID: 2100000, guid: 9913a296da6c20d40a76f5c736a0c964, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TUBO
+    second: {fileID: 2100000, guid: 1937e869ae2c1cb42b1f1ef8d6faf492, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VIDRIOS
+    second: {fileID: 2100000, guid: f2468dc64f07dd941bdec977880d88a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: ae76604cfea14ed43ba4b865c49ae992, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -34,7 +89,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.5
+    globalScale: 20
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -80,7 +135,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 20
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
