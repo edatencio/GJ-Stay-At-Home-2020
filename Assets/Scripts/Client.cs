@@ -10,10 +10,9 @@ public class Client : MonoBehaviour
     {
         switch (myClientGroup.State)
         {
-
             case ClientGroupState.Order:
                 {
-                    animator.SetTrigger("Order");
+                    //animator.SetTrigger("Order");
                 }
                 break;
 
@@ -23,10 +22,10 @@ public class Client : MonoBehaviour
 
             case ClientGroupState.Finish:
                 animator.SetBool("Eat", false);
-                animator.SetTrigger("Finish");
+
+                //animator.SetTrigger("Finish");
 
                 break;
-
         }
     }
 }
