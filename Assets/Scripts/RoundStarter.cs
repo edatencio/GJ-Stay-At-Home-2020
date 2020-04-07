@@ -1,11 +1,11 @@
 using UnityEngine;
 using TMPro;
-using System;
+using Cinemachine;
 
 public class RoundStarter : MonoBehaviour
 {
     [SerializeField] private Round round;
-    [SerializeField] private Transform cameraTranform;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Transform targetcameraTranform;
     [SerializeField] private PlayerController player;
     [SerializeField] private Transform targetPlayerPos;
@@ -24,8 +24,9 @@ public class RoundStarter : MonoBehaviour
     public void StartRound()
     {
         InitTimer();
-        cameraTranform.position = targetcameraTranform.position;
-        cameraTranform.rotation = targetcameraTranform.rotation;
+        virtualCamera.transform.position = targetcameraTranform.position;
+        virtualCamera.transform.rotation = targetcameraTranform.rotation;
+        virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_NoiseProfile = null;
         player.SetPositionInGame(targetPlayerPos);
     }
 
