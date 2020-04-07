@@ -4532,6 +4532,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ImpuestoBar
       objectReference: {fileID: 0}
+    - target: {fileID: 4721323836405086148, guid: 93909ea448453ad4486f4328f935d10c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5817203241130169978, guid: 93909ea448453ad4486f4328f935d10c,
         type: 3}
       propertyPath: m_RaycastTarget
@@ -4783,6 +4788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gota a Gota Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721323836405086148, guid: 93909ea448453ad4486f4328f935d10c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5817203241130169978, guid: 93909ea448453ad4486f4328f935d10c,
         type: 3}

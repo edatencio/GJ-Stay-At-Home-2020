@@ -13,7 +13,7 @@ public class ResultPanel : MonoBehaviour
 
         if(percentage == null) return;
 
-        displaySatisfaction.text = ((float)percentage).ToString("F2") + "%";
+        displaySatisfaction.text = ((float)percentage).ToString("F0");
         displayMoney.text = Restaurant.instance?.RoundMoney.ToString("F0") + "$";
     }
 

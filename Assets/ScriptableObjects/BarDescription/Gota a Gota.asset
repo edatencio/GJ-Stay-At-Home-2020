@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: Gota a Gota
   m_EditorClassIdentifier: 
   info:
-  - title: sadas
-    content: dsad
-  - title: dasda
-    content: asadad
-  - title: dsada
-    content: dasd
+  - title: "\xA1No hay nada peor que trabajar con preocupaciones! "
+    content: "Por eso, por que no alivias un poco de tu carga y pagas una parte de
+      tu deuda. Te aseguramos que una vez lo hagas, podr\xE1s trabajar con mayor
+      rapidez.\r "
+  - title: Ya volvio ese horrible cobrador!
+    content: ' Con solo verlo te estresas y de pensar que tienes que reunir cierta
+      cantidad diaria para pagarle. Por eso, pagale hoy y despreocupate un poco por
+      la cantidad de dinero que necesitas conseguir.'
+  - title: "\xA1Es hora de salir tus deudas! "
+    content: '
+
+'
