@@ -10,6 +10,8 @@ public class Kitchen : Interactable
     [SerializeField] private KitchenClock clock;
     [SerializeField] private Transform itemTarget;
     [SerializeField] private bool helpThisKitchen;
+    [SerializeField] private AudioSource fryingAudio;
+    [SerializeField] private AudioSource dingAudio;
 
     //[SerializeField] private TextMeshPro textMesh;
 
@@ -76,10 +78,14 @@ public class Kitchen : Interactable
     {
         clock.gameObject.SetActive(true);
         State = InteractableState.Idle;
+        fryingAudio.Play();
+
         yield return new WaitForSeconds(cookTime);
         if (CurrentItem != null)
             (CurrentItem as Order).IsCooked = true;
 
+        fryingAudio.Stop();
+        dingAudio.Play();
         clock.gameObject.SetActive(false);
         State = InteractableState.Emit;
     }
