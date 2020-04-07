@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, BoxGroup("References")] private NavMeshAgent navMesh;
     [SerializeField, BoxGroup("References")] private Animator animator;
     [SerializeField, BoxGroup("References")] private ParticleSystem runParticles;
+    [SerializeField, BoxGroup("References")] private AudioSource pickPlaceItemAudio;
     [SerializeField, BoxGroup("References"), ReorderableList] private Transform[] itemsPosition = new Transform[2];
 
     private IInteractableItem[] items = new IInteractableItem[2];
@@ -219,6 +220,7 @@ public class PlayerController : MonoBehaviour
                     items[i].transform.position = itemsPosition[i].position;
                     items[i].transform.rotation = itemsPosition[i].rotation;
                     items[i].transform.SetParent(itemsPosition[i]);
+                    pickPlaceItemAudio.Play();
                 }
                 catch (System.Exception)
                 {
@@ -235,6 +237,7 @@ public class PlayerController : MonoBehaviour
         {
             items[index].transform.SetParent(null);
             items[index] = null;
+            pickPlaceItemAudio.Play();
         }
     }
 
