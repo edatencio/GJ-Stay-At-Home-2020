@@ -189,11 +189,20 @@ public class PlayerController : MonoBehaviour
             //TODO: sometimes get's null exception
             if (items[i] == null)
             {
-                items[i] = item;
-                items[i].transform.position = itemsPosition[i].position;
-                items[i].transform.rotation = itemsPosition[i].rotation;
-                items[i].transform.SetParent(itemsPosition[i]);
+                try
+                {
+                    items[i] = item;
+                    items[i].transform.position = itemsPosition[i].position;
+                    items[i].transform.rotation = itemsPosition[i].rotation;
+                    items[i].transform.SetParent(itemsPosition[i]);
+                }
+                catch (System.Exception)
+                {
+                    return;
+
+                }
                 return;
+
             }
         }
     }
