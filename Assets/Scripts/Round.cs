@@ -6,6 +6,7 @@ public class Round : MonoBehaviour
     [SerializeField] private float elapsedTime;
     [SerializeField] private float roundTime;
     [SerializeField] private Image watch;
+    [SerializeField] private TMPro.TextMeshProUGUI displayWatch;
     [SerializeField] private RoundStarter roundStarter;
     public int level = 0;
     public float Roundtime => roundTime;
@@ -17,6 +18,11 @@ public class Round : MonoBehaviour
     public static event Action CloseTime;
     public static event Action RoundOver;
 
+    private void Start()
+    {
+        displayWatch.text = "";
+        watch.fillAmount = 0;
+    }
     public void StartRound()
     {
         var stats = RoundManager.instance.GetRound();
@@ -27,7 +33,10 @@ public class Round : MonoBehaviour
         level++;
         isRunning = true;
         RoundStart?.Invoke();
-        
+        watch.fillAmount = 0;
+        displayWatch.text = "Abierto";
+
+
     }
     private void Update()
     {
@@ -37,6 +46,7 @@ public class Round : MonoBehaviour
             if (!timeOver)
             {
                 Debug.Log("Time is Over!");
+                displayWatch.text = "Cerrado";
                 CloseTime?.Invoke();
                 timeOver = true;
             }

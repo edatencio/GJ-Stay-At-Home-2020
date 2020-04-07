@@ -6,6 +6,7 @@ public class FamilyImprover : MonoBehaviour
 
     [SerializeField] private GameObject zorayaSitModel;
     [SerializeField] private Transform zorayaSitPos;
+    [SerializeField] private PlayerController player;
     private void Awake()
     {
         Bar.AddedPoint += ImproveFamily;
@@ -34,6 +35,7 @@ public class FamilyImprover : MonoBehaviour
                 zorayaSitModel.SetActive(true);
                 zorayaSitModel.transform.position = zorayaSitPos.position;
                 zorayaSitModel.transform.rotation = zorayaSitPos.rotation;
+                player.SetMeshJOJO();
                 break;
         }
     }
