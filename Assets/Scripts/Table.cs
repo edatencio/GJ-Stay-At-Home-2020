@@ -42,7 +42,9 @@ public class Table : Interactable
         if (client == clientGroup)
         {
             IsTaken = false;
-            State = InteractableState.Receive;
+
+            if (client.State != ClientGroup.ClientGroupState.Finish)
+                State = InteractableState.Receive;
         }
     }
 

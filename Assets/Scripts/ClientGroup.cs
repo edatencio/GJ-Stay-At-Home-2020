@@ -14,9 +14,11 @@ public class ClientGroup : MonoBehaviour
     [SerializeField, BoxGroup("Settings")] private float emotionDisplayTime = 20f;
     [Range(0, 1), BoxGroup("Settings")] public float SatisfactionAmount;
     [SerializeField, BoxGroup("References")] private GameObject orderPrefab;
+    [SerializeField, BoxGroup("References")] private GameObject dirtyPlatesPrefab;
     [SerializeField, BoxGroup("References")] private SpriteRenderer emotionSprite;
     [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
     [ReorderableList, BoxGroup("References")] public List<Client> clients;
+
     private Table table;
     private Vector3 orignalPos;
     private Dragger dragger;
@@ -128,10 +130,9 @@ public class ClientGroup : MonoBehaviour
                     else if (timer.ElapsedSeconds >= eatingTime)
                     {
                         Destroy(Order.gameObject);
-                        ChangeState(ClientGroupState.Finish);
                         table.State = Interactable.InteractableState.Receive;
-
-                        // TODO poner platos sucios en la mesa
+                        table.SetItem(Instantiate(dirtyPlatesPrefab, Vector3.zero, Quaternion.Euler(Vector3.zero)).GetComponent<PlatesDirty>());
+                        ChangeState(ClientGroupState.Finish);
                     }
                 }
                 break;
@@ -273,6 +274,7 @@ public class ClientGroup : MonoBehaviour
     {
         if (State == ClientGroupState.WaitingOrder)
             Destroy(Order.gameObject);
+
         var tip = (clients.Count * UnityEngine.Random.Range(0.5f, 1f)) / SatisfactionAmount;
         if (SatisfactionAmount <= 0) tip = 0;
 

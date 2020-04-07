@@ -145,6 +145,17 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
             }
+            else if (destination is PlatesWasher)
+            {
+                for (int i = 0; i < items.Length; i++)
+                {
+                    if (items[i] != null && items[i] is PlatesDirty)
+                    {
+                        TrySetItem(i);
+                        return;
+                    }
+                }
+            }
         }
     }
 
@@ -199,10 +210,8 @@ public class PlayerController : MonoBehaviour
                 catch (System.Exception)
                 {
                     return;
-
                 }
                 return;
-
             }
         }
     }
