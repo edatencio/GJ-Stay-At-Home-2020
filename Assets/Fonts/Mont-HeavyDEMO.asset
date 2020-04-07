@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Mont-HeavyDEMO
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1347994709
   material: {fileID: -7334957872706514692}
-  materialHashCode: 0
+  materialHashCode: -1192398658
   m_Version: 1.1.0
   m_SourceFontFileGUID: f0d025f4ba83caa408b345fb358f29dd
   m_SourceFontFile_EditorRef: {fileID: 0}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,8 +15,17 @@ public class Bar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public int Count => count;
     public Button plusButton;
     public BarDescription descriptions;
+    public List<RandomEvent> randomEvents = new List<RandomEvent>();
 
-
+    public RandomEvent RandomEvent()
+    {
+        if (count > 0)
+        {
+            count--;
+            return randomEvents[UnityEngine.Random.Range(0, randomEvents.Count - 1)];
+        }
+        return null;
+    }
     private void Start()
     {
         bar.fillAmount = count / 3f;
