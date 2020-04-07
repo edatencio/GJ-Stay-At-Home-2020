@@ -15,13 +15,13 @@ public class ClientGroup : MonoBehaviour
     [Range(0, 1), BoxGroup("Settings")] public float SatisfactionAmount;
     [SerializeField, BoxGroup("References")] private GameObject orderPrefab;
     [SerializeField, BoxGroup("References")] private GameObject dirtyPlatesPrefab;
+    [SerializeField, BoxGroup("References")] private Dragger dragger;
     [SerializeField, BoxGroup("References")] private SpriteRenderer emotionSprite;
     [SerializeField, BoxGroup("References")] private GameObject satisfactionSlider;
     [ReorderableList, BoxGroup("References")] public List<Client> clients;
 
     private Table table;
     private Vector3 orignalPos;
-    private Dragger dragger;
     public TMPro.TextMeshProUGUI comisionDisplay;
     private bool eating;
     private bool ordered;
@@ -44,7 +44,6 @@ public class ClientGroup : MonoBehaviour
     private void Start()
     {
         orignalPos = transform.position;
-        dragger = gameObject.AddComponent<Dragger>();
         SatisfactionAmount = 1;
         patienceTime *= clients.Count;
         eatingTime += (eatingTime * 0.1f) * clients.Count;

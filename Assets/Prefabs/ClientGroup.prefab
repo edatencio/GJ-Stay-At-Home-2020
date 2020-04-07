@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 2915727548263221415}
   - component: {fileID: 2915727548263221414}
   - component: {fileID: 2889454109027090522}
+  - component: {fileID: 6166767678158839625}
   m_Layer: 0
   m_Name: ClientGroup
   m_TagString: Untagged
@@ -356,6 +357,7 @@ MonoBehaviour:
     type: 3}
   dirtyPlatesPrefab: {fileID: 2022305856152961078, guid: 5362312b111c593439c7aac8c825aa6f,
     type: 3}
+  dragger: {fileID: 6166767678158839625}
   emotionSprite: {fileID: 4890342070676917623}
   satisfactionSlider: {fileID: 1788172148899810913}
   clients:
@@ -418,6 +420,21 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   clientGroup: {fileID: 2915727548263221415}
   imageToFill: {fileID: 4463338229735486246}
+--- !u!114 &6166767678158839625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915727548263221409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f53ff063b73a424a8a4e5e15ef65af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &5668500591594827755
 GameObject:
   m_ObjectHideFlags: 0
