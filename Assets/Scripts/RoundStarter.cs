@@ -11,7 +11,7 @@ public class RoundStarter : MonoBehaviour
     private float elapsedTime;
     private bool started;
     Timer timer = new Timer();
-    private void Start()
+    public void StartRound()
     {
         AdministrationSystem.OnClose += InitTimer;
         Round.RoundOver += RoundOver;
