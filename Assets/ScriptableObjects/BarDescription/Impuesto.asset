@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: Impuesto
   m_EditorClassIdentifier: 
   info:
-  - title: dasdas
-    content: dasdas
-  - title: dsadas
-    content: dasdasd
-  - title: dasda
-    content: dasdsa
+  - title: "\xA1Es momento de pagar tus servicios!"
+    content: ' Necesitas agua, electricidad y gas para mantener tu restaurante activo,
+      aunque antes trabajabas sin ellos, si comienzas a pagarlos, podras cocinar
+      con mayor rapidez.'
+  - title: " \xA1Es hora de ser una empresa oficial! "
+    content: "Si comienzas a pagar tus impuestos, ya no tendr\xE1s que huir de los
+      policias y mas clientes podran llegar a ti.\r"
+  - title: "\xA1Tu negocio ha crecido!"
+    content: " Ahora que do\xF1a arepa es todo un exito, es probable que tengas que
+      pagar una mayor cantidad, pero esto tambien significa que mas clientes vendran
+      a probar tus creaciones.\r\n"

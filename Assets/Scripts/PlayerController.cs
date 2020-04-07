@@ -236,5 +236,25 @@ public class PlayerController : MonoBehaviour
         renderer.sharedMesh = zorayaMesh;
         renderer.material = zorayaMaterial;
     }
+
+    public void ChangeSpeed(int level)
+    {
+        switch (level)
+        {
+            case 0:
+                navMesh.acceleration = 30;
+                navMesh.speed = 5f;
+                break;
+            case 1:
+                navMesh.acceleration = 50;
+                navMesh.speed = 7f;
+                break;
+
+            default:
+                navMesh.acceleration = 50;
+                navMesh.speed = 7f;
+                break;
+        }
+    }
 }
 
